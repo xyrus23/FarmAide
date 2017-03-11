@@ -29,8 +29,14 @@
             android:label="@string/title_activity_admin"
             android:theme="@style/AppTheme" />
         <activity
+            android:name=".SampleLogin"
+            android:label="@string/title_activity_login" />
+        <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login"></activity>
+            android:label="@string/title_activity_login"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".UserInventoryDetailActivity"></activity>
+        <activity android:name=".AdminInventoryDetailActivity"></activity>
     </application>
 
 </manifest>

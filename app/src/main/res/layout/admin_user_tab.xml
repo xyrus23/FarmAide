@@ -6,13 +6,14 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.redfoxoptimaiii.farmaide.Admin$PlaceholderFragment">
+    tools:context="com.example.redfoxoptimaiii.farmaide.AdminUserTab">
 
-    <TextView
-        android:id="@+id/section_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/users_label"
-        />
-
+    <ListView
+        android:id="@+id/listView_adminUsers"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:entries="@array/listView_entries" />
 </RelativeLayout>

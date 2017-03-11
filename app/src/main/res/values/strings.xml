@@ -4,14 +4,27 @@
     <string name="login_as">Log in as:</string>
     <string name="input_username">Username</string>
     <string name="input_password">Password</string>
+    <string name="loginBtn">Login</string>
     <string name="admin">Admin</string>
     <string name="user">User</string>
+    <string name="signup">Sign Up</string>
     <string name="opti_label">Optimizer</string>
     <string name="inventory_label">Inventory</string>
     <string name="users_label">Users</string>
     <string name="concentrate_label">Concentrate</string>
     <string name="roughage_label">Roughage</string>
     <string name="supplier_label">Supplier</string>
+    <string name="cp_label">Crude Protein:</string>
+    <string name="me_label">Metabolizable Energy:</string>
+    <string name="ca_label">Calcium:</string>
+    <string name="p_label">Phosphorus:</string>
+    <string name="price_label">Price:</string>
+    <string name="avsupply_label">Available Supply:</string>
+    <string name="add_btn">Add</string>
+    <string name="sub_btn">Subtract</string>
+    <string name="edit_btn">Edit</string>
+    <string name="del_btn">Delete</string>
+    <string-array name="listView_entries"></string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -19,7 +32,7 @@
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_admin">Admin</string>
-    <string name="title_activity_login">Sign in</string>
+    <string name="title_activity_login1">Sign in</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -33,4 +46,5 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="title_activity_login">LoginActivity</string>
 </resources>
