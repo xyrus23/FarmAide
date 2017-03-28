@@ -9,17 +9,16 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.redfoxoptimaiii.farmaide.LoginActivity">
+    tools:context="com.example.redfoxoptimaiii.farmaide.MainActivity">
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         app:srcCompat="@drawable/avatar"
         android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/app_title"
-        android:layout_alignEnd="@+id/app_title"
-        android:layout_marginTop="23dp" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp" />
 
     <TextView
         android:text="@string/app_name"
@@ -54,75 +53,46 @@
         tools:text="@string/login_as"
         android:textAppearance="@android:style/TextAppearance.Material.Menu"
         android:textColor="@android:color/black"
-        android:layout_above="@+id/email_login_form"
+        android:layout_above="@+id/button_admin"
         android:layout_centerHorizontal="true" />
 
-    <LinearLayout
-        android:id="@+id/email_login_form"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/button_admin"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="18dp"
-        android:layout_alignBottom="@+id/button_login"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/username"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/email_login_form"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_weight="1"
-                android:fontFamily="sans-serif"
-                android:hint="@string/input_username"
-                android:inputType="text"
-                android:maxLines="1"
-                android:singleLine="true" />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/textInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignBottom="@+id/button_login"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="35dp">
-
-            <EditText
-                android:id="@+id/password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:hint="@string/input_password"
-                android:imeActionId="@+id/login"
-                android:imeActionLabel="@string/action_sign_in_short"
-                android:imeOptions="actionUnspecified"
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:singleLine="true" />
-
-        </android.support.design.widget.TextInputLayout>
-
-    </LinearLayout>
+        android:elevation="0dp"
+        android:onClick="openLoginAdmin"
+        android:text="@string/admin"
+        android:layout_above="@+id/button_user"
+        android:layout_alignRight="@+id/app_subtitle"
+        android:layout_alignEnd="@+id/app_subtitle"
+        android:layout_alignLeft="@+id/app_subtitle"
+        android:layout_alignStart="@+id/app_subtitle" />
 
     <Button
-        android:id="@+id/button_login"
+        android:id="@+id/button_user"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:onClick="login"
-        android:text="@string/loginBtn"
+        android:onClick="openLoginUser"
+        android:text="@string/user"
+        android:layout_above="@+id/signup"
+        android:layout_alignLeft="@+id/button_admin"
+        android:layout_alignStart="@+id/button_admin"
+        android:layout_alignRight="@+id/button_admin"
+        android:layout_alignEnd="@+id/button_admin" />
+
+    <Button
+        android:text="@string/signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/signup"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:elevation="1dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="27dp" />
+        android:layout_centerHorizontal="true" />
+
+
 
 </RelativeLayout>

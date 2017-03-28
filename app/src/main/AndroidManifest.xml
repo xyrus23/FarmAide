@@ -35,8 +35,10 @@
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme" />
-        <activity android:name=".UserInventoryDetailActivity"></activity>
-        <activity android:name=".AdminInventoryDetailActivity"></activity>
+        <activity android:name=".UserInventoryDetailActivity" />
+        <activity android:name=".AdminInventoryDetailActivity" />
+        <activity android:name=".OptimizerMenuActivity" />
+        <activity android:name=".AddInventoryActivity"></activity>
     </application>
 
 </manifest>

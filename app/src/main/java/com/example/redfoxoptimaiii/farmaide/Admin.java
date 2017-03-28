@@ -1,5 +1,6 @@
 package com.example.redfoxoptimaiii.farmaide;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -11,6 +12,7 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -31,6 +33,7 @@ public class Admin extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+    public static String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +43,9 @@ public class Admin extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        TextView username = (TextView) findViewById(R.id.profile_name);
-        username.setText(getIntent().getStringExtra("username"));
+        username = getIntent().getStringExtra("username");
+        TextView textView_username = (TextView) findViewById(R.id.profile_name);
+        textView_username.setText(username);
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -53,14 +57,21 @@ public class Admin extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_admin, menu);
+        menu.getItem(0).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                finish();
+                return false;
+            }
+        });
         return true;
     }
 
@@ -93,14 +104,17 @@ public class Admin extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    AdminOptimizerTab tab1 = new AdminOptimizerTab();
+                    AdminInventoryTab tab1 = new AdminInventoryTab();
                     return tab1;
                 case 1:
-                    AdminInventoryTab tab2 = new AdminInventoryTab();
+                    UserSupplierTab tab2 = new UserSupplierTab();
                     return tab2;
                 case 2:
-                    AdminUserTab tab3 = new AdminUserTab();
+                    AdminOptimizerTab tab3 = new AdminOptimizerTab();
                     return tab3;
+                case 3:
+                    AdminUserTab tab4 = new AdminUserTab();
+                    return tab4;
                 default:
                     return null;
             }
@@ -108,18 +122,20 @@ public class Admin extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 3;
+            // Show 4 total pages.
+            return 4;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "Optimizer";
-                case 1:
                     return "Inventory";
+                case 1:
+                    return "Supplier";
                 case 2:
+                    return "Optimizer";
+                case 3:
                     return "Users";
             }
             return null;

@@ -12,8 +12,10 @@
         android:id="@+id/listView_adminUsers"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:entries="@array/listView_entries"
+        android:layout_marginBottom="289dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:entries="@array/listView_entries" />
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>

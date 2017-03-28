@@ -4,16 +4,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:isScrollContainer="true"
     android:layoutDirection="ltr"
+    android:overScrollMode="ifContentScrolls"
     tools:context="com.example.redfoxoptimaiii.farmaide.AdminInventoryDetailActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:paddingTop="@dimen/appbar_padding_top"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimaryDark"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:navigationIcon="?attr/actionModeCloseDrawable"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="@string/app_name">
+
+            <!--<TextView-->
+            <!--android:id="@+id/profile_name"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="right"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:text="Profile"-->
+            <!--android:textAppearance="@style/TextAppearance.AppCompat.Medium" />-->
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
 
     <ImageView
         android:id="@+id/photo"
         android:layout_width="200dp"
         android:layout_height="180dp"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/appbar"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="26dp"
+        android:layout_marginTop="14dp"
         app:srcCompat="@mipmap/ic_launcher"
         tools:layout_editor_absoluteX="80dp"
         tools:layout_editor_absoluteY="16dp" />
@@ -22,15 +55,15 @@
         android:id="@+id/feed_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/photo"
+        android:layout_centerHorizontal="true"
         android:text="TextView"
         android:textAlignment="center"
         android:textAppearance="@android:style/TextAppearance.Material.Large"
         android:textSize="25sp"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="180dp"
-        tools:layout_editor_absoluteY="232dp"
-        android:layout_below="@+id/photo"
-        android:layout_centerHorizontal="true" />
+        tools:layout_editor_absoluteY="232dp" />
 
     <GridLayout
         android:id="@+id/gridLayout"
@@ -39,11 +72,32 @@
         android:layout_alignWithParentIfMissing="false"
         android:layout_below="@+id/feed_name"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="23dp"
+        android:layout_marginTop="19dp"
         android:columnCount="2"
-        android:rowCount="6"
+        android:rowCount="7"
         tools:layout_editor_absoluteX="26dp"
         tools:layout_editor_absoluteY="275dp">
+
+        <TextView
+            android:id="@+id/dm_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/dm_label"
+            android:textAppearance="@android:style/TextAppearance.Material.Medium"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/dm_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="TextView"
+            android:textAppearance="@android:style/TextAppearance.Material.Medium"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/cp_label"
@@ -175,41 +229,5 @@
             android:textSize="16sp" />
 
     </GridLayout>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="22dp"
-        android:clickable="true"
-        android:tint="@android:color/white"
-        app:fabSize="normal"
-        app:srcCompat="@android:drawable/ic_input_add"
-        android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/photo"
-        android:layout_alignStart="@+id/photo" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:tint="@android:color/white"
-        app:fabSize="normal"
-        app:srcCompat="@android:drawable/ic_menu_edit"
-        android:layout_alignTop="@+id/floatingActionButton2"
-        android:layout_centerHorizontal="true" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:tint="@android:color/white"
-        app:fabSize="normal"
-        app:srcCompat="@android:drawable/ic_menu_delete"
-        android:layout_alignTop="@+id/floatingActionButton3"
-        android:layout_alignRight="@+id/photo"
-        android:layout_alignEnd="@+id/photo" />
 
 </RelativeLayout>
