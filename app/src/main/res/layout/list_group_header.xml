@@ -9,6 +9,7 @@
         android:id="@+id/listgroup_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:elevation="5dp"
         android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
         android:text="TextView"
         android:textAppearance="@android:style/TextAppearance.Material.Large"

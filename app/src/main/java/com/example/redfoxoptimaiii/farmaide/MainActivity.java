@@ -35,6 +35,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void signup(View view){
+        Intent intent = new Intent(this, Signup.class);
+        startActivity(intent);
+    }
+
     public boolean onSuccessLogin(String username, String password){
         try{
             SQLiteOpenHelper FarmAideDBHelper = new FarmAideDatabaseHelper(this);

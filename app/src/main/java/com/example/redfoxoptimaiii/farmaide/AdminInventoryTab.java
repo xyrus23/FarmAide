@@ -30,7 +30,7 @@ public class AdminInventoryTab extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.admin_inventory_tab, container, false);
+        final View rootView = inflater.inflate(R.layout.admin_inventory_tab, container, false);
         final ArrayList<String> feed_names = new ArrayList<>();
         final ArrayList<String> list = new ArrayList<>();
         ArrayList<String> feed_types = new ArrayList<>();
@@ -39,7 +39,8 @@ public class AdminInventoryTab extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                Intent intent = new Intent(getContext(), AddInventoryActivity.class);
+                startActivity(intent);
             }
         });
 

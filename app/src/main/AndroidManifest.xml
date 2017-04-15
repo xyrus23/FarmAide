@@ -38,7 +38,8 @@
         <activity android:name=".UserInventoryDetailActivity" />
         <activity android:name=".AdminInventoryDetailActivity" />
         <activity android:name=".OptimizerMenuActivity" />
-        <activity android:name=".AddInventoryActivity"></activity>
+        <activity android:name=".AddInventoryActivity" />
+        <activity android:name=".Signup"></activity>
     </application>
 
 </manifest>

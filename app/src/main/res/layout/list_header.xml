@@ -8,6 +8,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:background="@color/colorPrimary"
+        android:elevation="5dp"
         android:padding="8dp"
         android:text="TextView"
         android:textAlignment="center"

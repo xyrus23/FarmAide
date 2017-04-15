@@ -10,111 +10,117 @@
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
-        android:paddingTop="@dimen/appbar_padding_top"
+        android:divider="?attr/dividerHorizontal"
+        android:showDividers="end"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
             app:navigationIcon="?attr/actionModeCloseDrawable"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="@string/ingredients">
 
         </android.support.v7.widget.Toolbar>
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/appbar"
-            android:layout_marginTop="3dp"
-            android:isScrollContainer="true"
-            android:orientation="horizontal"
-            android:padding="5dp">
-
-            <TextView
-                android:id="@+id/textView_animal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:singleLine="true"
-                android:text="TextView"
-                android:textAlignment="center"
-                android:textAppearance="@android:style/TextAppearance.Material.Large"
-                android:textColor="@android:color/white"
-                android:textSize="18sp" />
-
-            <ImageView
-                android:id="@+id/arrow1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:adjustViewBounds="false"
-                android:rotation="180"
-                android:scaleType="centerInside"
-                app:srcCompat="?attr/actionModeCloseDrawable" />
-
-            <TextView
-                android:id="@+id/textView_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:singleLine="true"
-                android:text="TextView"
-                android:textAlignment="center"
-                android:textAppearance="@android:style/TextAppearance.Material.Large"
-                android:textColor="@android:color/white"
-                android:textSize="18sp" />
-
-            <ImageView
-                android:id="@+id/arrow2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:rotation="180"
-                android:scaleType="centerInside"
-                app:srcCompat="?attr/actionModeCloseDrawable" />
-
-            <TextView
-                android:id="@+id/textView_subType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:singleLine="true"
-                android:text="TextView"
-                android:textAlignment="center"
-                android:textAppearance="@android:style/TextAppearance.Material.Large"
-                android:textColor="@android:color/white"
-                android:textSize="18sp" />
-
-        </LinearLayout>
-
     </android.support.design.widget.AppBarLayout>
 
-    <Button
-        android:id="@+id/btn_optimize"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/appbar"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="35dp"
-        android:padding="10dp"
-        android:text="@string/optimize"
-        android:textSize="16sp" />
+        android:background="@color/colorPrimary"
+        android:gravity="center_horizontal"
+        android:isScrollContainer="false"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:showDividers="none">
+
+        <TextView
+            android:id="@+id/textView_animal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="TextView"
+            android:textAlignment="textStart"
+            android:textAppearance="@android:style/TextAppearance.Material.Large"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/arrow1"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:tint="@android:color/white"
+            app:srcCompat="@drawable/next" />
+
+        <TextView
+            android:id="@+id/textView_type"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="TextView"
+            android:textAlignment="textStart"
+            android:textAppearance="@android:style/TextAppearance.Material.Large"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/arrow2"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="centerInside"
+            android:tint="@android:color/white"
+            app:srcCompat="@drawable/next" />
+
+        <TextView
+            android:id="@+id/textView_subType"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="TextView"
+            android:textAlignment="textStart"
+            android:textAppearance="@android:style/TextAppearance.Material.Large"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+    </LinearLayout>
 
     <ExpandableListView
         android:id="@+id/expandablelist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/btn_optimize"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/appbar"
-        android:layout_above="@+id/btn_optimize" />
+        android:layout_below="@+id/linearLayout" />
+
+    <Button
+        android:id="@+id/btn_optimize"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:padding="10dp"
+        android:text="@string/optimize"
+        android:textSize="16sp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
