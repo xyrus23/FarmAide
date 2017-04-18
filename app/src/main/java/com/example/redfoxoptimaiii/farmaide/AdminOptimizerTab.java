@@ -67,7 +67,7 @@ public class AdminOptimizerTab extends Fragment {
                     if(recipe_name.contains(list.get(position))) {
                         Intent intent = new Intent(getContext(), OptimizerMenuActivity.class);
                         Animal animal = (Animal) animals.get(position);
-                        float[] nutri_req = new float[] {animal.getDm_req(),animal.getCp_req(),animal.getMe_req(),animal.getCa_req(),animal.getP_req()};
+                        float[] nutri_req = new float[] {animal.getCp_req(),animal.getMe_req(),animal.getCa_req(),animal.getP_req()};
                         intent.putExtra("recipe_name",animal.getName());
                         intent.putExtra("animal",animal.getAnimal());
                         intent.putExtra("animal_type",animal.getType());

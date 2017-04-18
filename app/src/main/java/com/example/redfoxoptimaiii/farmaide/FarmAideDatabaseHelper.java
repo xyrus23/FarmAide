@@ -31,7 +31,8 @@ public class FarmAideDatabaseHelper extends SQLiteOpenHelper {
                 + "feed_id INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + "feed_type TEXT, "
                 + "feed_name TEXT, "
-                + "dry_matter TEXT,"
+                + "dry_matter REAL,"
+                + "total_digestible_nutrient REAL,"
                 + "feed_price REAL, "
                 + "supply_amount REAL, "
                 + "crude_protein REAL,"
@@ -39,9 +40,10 @@ public class FarmAideDatabaseHelper extends SQLiteOpenHelper {
                 + "calcium REAL, "
                 + "phosphorus REAL, "
                 + "pic_ref INTEGER);");
-        insertFeed(db, "Concentrate", "Yellow Corn", "-", 16, 23, 7.8, 3350, .07, .25, R.drawable.concentrate_yellowcorn);
-        insertFeed(db, "Concentrate", "Cassava Meal", "-", 8, 33.56, 1.8, 2800, .12, .1, R.drawable.concentrate_cassavameal);
-        insertFeed(db, "Roughage", "Napier Grass", "-", 0, 500.64, 63, 10.31, .3, .25, R.drawable.roughage_napier);
+        insertFeed(db, "Concentrate", "Yellow Corn", 87, 75.2, 16, 23, 7.8, 3350, .07, .25, R.drawable.concentrate_yellowcorn);
+        insertFeed(db, "Concentrate", "Cassava Meal", 86, 84, 8, 33.56, 1.8, 2800, .12, .1, R.drawable.concentrate_cassavameal);
+        insertFeed(db, "Roughage", "Napier Grass", 22, 55, 0, 500.64, 63, 10.31, .3, .25, R.drawable.roughage_napier);
+        insertFeed(db, "Concentrate", "Rice Bran", 89, 77.7, 10, 25, 12.5, 3000, .08, 1.6, R.drawable.concentrate_ricebran);
 
         db.execSQL("CREATE TABLE RECIPE ("
                 + "recipe_id INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -96,12 +98,13 @@ public class FarmAideDatabaseHelper extends SQLiteOpenHelper {
         db.insert("USER", null, userValues);
     }
 
-    private void insertFeed(SQLiteDatabase db, String feed_type, String feed_name, String dry_matter, double feed_price, double supply_amount, double crude_protein, double met_energy, double calcium, double phosphorus, int pic_ref){
+    private void insertFeed(SQLiteDatabase db, String feed_type, String feed_name, double dry_matter, double total_digestible_nutrient, double feed_price, double supply_amount, double crude_protein, double met_energy, double calcium, double phosphorus, int pic_ref){
         ContentValues feedValues = new ContentValues();
 
         feedValues.put("feed_type", feed_type);
         feedValues.put("feed_name", feed_name);
         feedValues.put("dry_matter", dry_matter);
+        feedValues.put("total_digestible_nutrient", total_digestible_nutrient);
         feedValues.put("feed_price", feed_price);
         feedValues.put("supply_amount", supply_amount);
         feedValues.put("crude_protein", crude_protein);

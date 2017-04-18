@@ -72,7 +72,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="19dp"
         android:columnCount="2"
-        android:rowCount="7"
+        android:rowCount="8"
         tools:layout_editor_absoluteX="26dp"
         tools:layout_editor_absoluteY="275dp">
 
@@ -89,6 +89,27 @@
 
         <TextView
             android:id="@+id/dm_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="TextView"
+            android:textAppearance="@android:style/TextAppearance.Material.Medium"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tdn_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/tdn_label"
+            android:textAppearance="@android:style/TextAppearance.Material.Medium"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tdn_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"

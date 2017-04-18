@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 import static java.security.AccessController.getContext;
@@ -47,7 +49,7 @@ public class AdminInventoryDetailActivity extends AppCompatActivity {
             db = FarmAideDBHelper.getReadableDatabase();
 
             cursor = db.query("FEED",
-                    new String[] {"feed_price", "supply_amount", "dry_matter", "crude_protein", "met_energy", "calcium", "phosphorus", "pic_ref"},
+                    new String[] {"feed_price", "supply_amount", "dry_matter", "total_digestible_nutrient", "crude_protein", "met_energy", "calcium", "phosphorus", "pic_ref"},
                     "feed_name = ?",
                     new String[] {feed_name},
                     null,null,null);
@@ -59,17 +61,19 @@ public class AdminInventoryDetailActivity extends AppCompatActivity {
                 TextView textView_availSupply = (TextView) findViewById(R.id.availsupply_content);
                 textView_availSupply.setText(cursor.getString(1)+"kg");
                 TextView dm = (TextView) findViewById(R.id.dm_content);
-                dm.setText(cursor.getString(2));
+                dm.setText(cursor.getString(2)+"%");
+                TextView textView_tdn = (TextView) findViewById(R.id.tdn_content);
+                textView_tdn.setText(cursor.getString(3)+"%");
                 TextView textView_cp = (TextView) findViewById(R.id.cp_content);
-                textView_cp.setText(cursor.getString(3)+"%");
+                textView_cp.setText(cursor.getString(4)+"%");
                 TextView textView_me = (TextView) findViewById(R.id.me_content);
-                textView_me.setText(cursor.getString(4)+"kcal/kg");
+                textView_me.setText(cursor.getString(5)+"kcal/kg");
                 TextView textView_ca = (TextView) findViewById(R.id.ca_content);
-                textView_ca.setText(cursor.getString(5)+"%");
+                textView_ca.setText(cursor.getString(6)+"%");
                 TextView textView_p = (TextView) findViewById(R.id.p_content);
-                textView_p.setText(cursor.getString(6)+"%");
+                textView_p.setText(cursor.getString(7)+"%");
                 ImageView photo = (ImageView) findViewById(R.id.photo);
-                photo.setImageResource(cursor.getInt(7));
+                photo.setImageResource(cursor.getInt(8));
             }
             cursor.close();
             db.close();

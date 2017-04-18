@@ -11,7 +11,7 @@
 
     <CheckBox
         android:id="@+id/list_item"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:checked="true"
         android:padding="5dp"
@@ -20,5 +20,15 @@
         android:text="TextView"
         android:textAppearance="@android:style/TextAppearance.Material.Medium"
         android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/list_item_supply"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="right|center_vertical"
+        android:text="TextView"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:textColor="@android:color/darker_gray" />
 
 </LinearLayout>
