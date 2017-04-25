@@ -123,18 +123,8 @@ public class Optimizer {
     public void getSolution(float[][] tableau){
         int j=0;
         System.out.println("Solution:");
-        for(int i=this.col-this.row;i<this.col;i+=1) {
+        for(int i=this.col-this.row;i<this.col;i+=1)
             solution.add(tableau[this.row-1][i]);
-            if(i==this.col-1) {
-                String value = String.format("%.2f", tableau[this.row-1][i]);
-                System.out.println("Z="+value);
-            }
-            else{
-                String value = String.format("%.2f", tableau[this.row-1][i]);
-                System.out.println("X"+j+"="+value);
-                j+=1;
-            }
-        }
     }
 
     public ArrayList<Float> getSolution(){

@@ -42,7 +42,8 @@
         <item>Roughage</item>
     </string-array>
     <string name="amount">Amount</string>
-    <string name="total_cost">Total Cost</string>
+    <string name="total_cost">Total Cost:</string>
+    <string name="cost">Cost</string>
     <string name="save">Save</string>
     <string name="compare">Compare</string>
 
