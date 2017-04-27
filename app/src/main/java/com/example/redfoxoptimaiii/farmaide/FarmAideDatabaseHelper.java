@@ -15,7 +15,7 @@ public class FarmAideDatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "FarmAideDB";
     private static final int DB_VERSION = 1;
-	String[] userColNames = {"username","password"};
+	String[] userColNames = {"user_type","username","password"};
 	String[] feedColNames = {"feed_type","feed_name","dry_matter","feed_price","supply_amount",
 	"crude_protein","met_energy","calcium","phosphorus","pic_ref"};
 	
@@ -26,11 +26,12 @@ public class FarmAideDatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE USER ("
                 + "user_id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "username TEXT, "
+				+ "user_type TEXT, "
+				+ "username TEXT, "
                 + "password TEXT);");
-        insertUser(db, "admin", "admin");
-        insertUser(db, "user", "user123");
-        insertUser(db, "user2", "useruser");
+        insertUser(db, "admin", "admin", "admin");
+        insertUser(db, "user", "user", "user123");
+        insertUser(db, "user", "user2", "useruser");
 
         db.execSQL("CREATE TABLE FEED("
                 + "feed_id INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -96,10 +97,11 @@ public class FarmAideDatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    private void insertUser(SQLiteDatabase db, String username, String password){
+    private void insertUser(SQLiteDatabase db, String user_type, String username, String password){
         ContentValues userValues = new ContentValues();
 
-        userValues.put("username", username);
+		userValues.put("user_type", user_type);
+		userValues.put("username", username);
         userValues.put("password", password);
         db.insert("USER", null, userValues);
     }

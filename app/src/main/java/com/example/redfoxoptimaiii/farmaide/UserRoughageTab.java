@@ -36,7 +36,7 @@ public class UserRoughageTab extends Fragment {
             cursor = db.query("FEED",
                     new String[] {"feed_name"},
                     "feed_type = ?",
-                    new String[] {"roughage"},
+                    new String[] {"Roughage"},
                     null,null,"feed_name ASC");
 
             if(cursor.moveToFirst()){

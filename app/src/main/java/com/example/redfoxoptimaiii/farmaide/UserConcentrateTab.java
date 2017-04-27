@@ -36,7 +36,7 @@ public class UserConcentrateTab extends Fragment {
             cursor = db.query("FEED",
                     new String[] {"feed_name"},
                     "feed_type = ?",
-                    new String[] {"concentrate"},
+                    new String[] {"Concentrate"},
                     null,null,"feed_name ASC");
 
             if(cursor.moveToFirst()){
