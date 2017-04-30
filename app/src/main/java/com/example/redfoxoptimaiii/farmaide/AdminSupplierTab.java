@@ -4,8 +4,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 
 
-/**
- * Created by REDFOX™ OptimaIII on 1/10/2017.
- */
-
-public class UserSupplierTab extends Fragment {
+public class AdminSupplierTab extends Fragment {
     private SQLiteDatabase db;
     private Cursor cursor, cursor1;
     HashMap<String,List<String>> listHashMap = new HashMap<>();
@@ -37,7 +33,7 @@ public class UserSupplierTab extends Fragment {
             cursor = db.query("FARM",
                     new String[]{"farm_id, farm_name, contact_no"},
                     "farm_id != ?",
-                    new String[]{Integer.toString(User.farm_id)},
+                    new String[]{Integer.toString(Admin.farm_id)},
                     null, null, null);
             if(cursor.moveToFirst()){
                 for (int i=0;i<cursor.getCount();i+=1){

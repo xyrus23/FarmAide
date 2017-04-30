@@ -20,13 +20,15 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     private List<String> listDataHeader;
     private HashMap<String, List<String>> listHashMap;
     private HashMap<String, List<String>> hashSupply;
+    private List<String> contacts;
     private HashMap<String, String> checked;
 
-    public ExpandableListAdapter(Context context, List<String> listDataHeader, HashMap<String, List<String>> listHashMap, HashMap<String, List<String>> hashSupply) {
+    public ExpandableListAdapter(Context context, List<String> listDataHeader, HashMap<String, List<String>> listHashMap, HashMap<String, List<String>> hashSupply, List<String> contacts) {
         this.context = context;
         this.listDataHeader = listDataHeader;
         this.listHashMap = listHashMap;
         this.hashSupply = hashSupply;
+        this.contacts = contacts;
     }
 
     @Override
@@ -73,10 +75,19 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         String headerTitle = (String)getGroup(groupPosition);
         if(convertView == null){
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.list_group_header,null);
+            if(contacts!=null) convertView = inflater.inflate(R.layout.supplier_list_header,null);
+            else convertView = inflater.inflate(R.layout.list_group_header,null);
         }
-        TextView list_header = (TextView) convertView.findViewById(R.id.listgroup_header);
-        list_header.setText(headerTitle);
+        if (contacts!=null){
+            TextView textView_header = (TextView) convertView.findViewById(R.id.textView_header);
+            textView_header.setText(headerTitle);
+            TextView textView_subheader = (TextView) convertView.findViewById(R.id.textView_subheader);
+            textView_subheader.setText(contacts.get(groupPosition));
+        }
+        else{
+            TextView list_header = (TextView) convertView.findViewById(R.id.listgroup_header);
+            list_header.setText(headerTitle);
+        }
         return convertView;
     }
 
@@ -86,7 +97,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         final String supplyText = getSupply(groupPosition,childPosition);
         if(convertView == null){
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.list_group_item,null);
+            if (contacts!=null) convertView = inflater.inflate(R.layout.supplier_list_group_item, null);
+            else convertView = inflater.inflate(R.layout.list_group_item,null);
         }
 
         TextView listItem = (TextView) convertView.findViewById(R.id.list_item);

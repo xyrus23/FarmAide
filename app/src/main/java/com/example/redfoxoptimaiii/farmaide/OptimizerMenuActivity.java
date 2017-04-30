@@ -109,7 +109,7 @@ public class OptimizerMenuActivity extends AppCompatActivity {
         } catch (SQLiteException e){ }
 
         ExpandableListView listView = (ExpandableListView) findViewById(R.id.expandablelist);
-        ExpandableListAdapter listAdapter = new ExpandableListAdapter(this, headers, listHashMap, hashSupply);
+        ExpandableListAdapter listAdapter = new ExpandableListAdapter(this, headers, listHashMap, hashSupply, null);
         listView.setAdapter(listAdapter);
     }
 

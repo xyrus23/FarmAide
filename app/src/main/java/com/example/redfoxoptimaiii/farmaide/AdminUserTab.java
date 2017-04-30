@@ -42,7 +42,7 @@ public class AdminUserTab extends Fragment {
 
             cursor = db.query("USER",
                     new String[] {"username"},
-                    "farm_id",new String[]{Integer.toString(Admin.farm_id)},
+                    "farm_id=?",new String[]{Integer.toString(Admin.farm_id)},
                     null,null,"username ASC");
 
             if(cursor.moveToFirst()){

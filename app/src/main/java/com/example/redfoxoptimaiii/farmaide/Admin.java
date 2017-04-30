@@ -109,7 +109,7 @@ public class Admin extends AppCompatActivity {
                     AdminInventoryTab tab1 = new AdminInventoryTab();
                     return tab1;
                 case 1:
-                    UserSupplierTab tab2 = new UserSupplierTab();
+                    AdminSupplierTab tab2 = new AdminSupplierTab();
                     return tab2;
                 case 2:
                     AdminOptimizerTab tab3 = new AdminOptimizerTab();
