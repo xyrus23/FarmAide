@@ -3,9 +3,12 @@
     package="com.example.redfoxoptimaiii.farmaide">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
-    <uses-feature android:name="android.hardware.camera2" android:required="true"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-feature
+        android:name="android.hardware.camera2"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -40,7 +43,8 @@
         <activity android:name=".OptimizerMenuActivity" />
         <activity android:name=".AddInventoryActivity" />
         <activity android:name=".Signup" />
-        <activity android:name=".OptimizerSolutionActivity"></activity>
+        <activity android:name=".OptimizerSolutionActivity" />
+        <activity android:name=".UserSignup"></activity>
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package com.example.redfoxoptimaiii.farmaide;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -24,6 +25,7 @@ public class User extends AppCompatActivity {
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
+    public static int farm_id;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -40,6 +42,7 @@ public class User extends AppCompatActivity {
 
         TextView username = (TextView) findViewById(R.id.profile_name);
         username.setText(getIntent().getStringExtra("username"));
+        farm_id = getIntent().getIntExtra("farm_id", 0);
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -59,6 +62,15 @@ public class User extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_user, menu);
+        menu.getItem(0).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                finish();
+                return false;
+            }
+        });
         return true;
     }
 

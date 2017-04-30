@@ -60,7 +60,7 @@ public class OptimizerMenuActivity extends AppCompatActivity {
             db = FarmAideDBHelper.getReadableDatabase();
             cursor = db.query("FEED",
                     new String[] {"feed_name, supply_amount"},
-                    "feed_type=?",new String[] {"Roughage"},null,null,"feed_name ASC");
+                    "farm_id=? AND feed_type=?",new String[] {Integer.toString(Admin.farm_id),"Roughage"},null,null,"feed_name ASC");
             if(cursor.moveToFirst()){
                 headers.add("Roughage");
                 List<String> roughage = new ArrayList<>();
@@ -75,7 +75,7 @@ public class OptimizerMenuActivity extends AppCompatActivity {
             }
             cursor = db.query("FEED",
                     new String[] {"feed_name, supply_amount"},
-                    "feed_type=?",new String[] {"Concentrate"},null,null,"feed_name ASC");
+                    "farm_id=? AND feed_type=?",new String[] {Integer.toString(Admin.farm_id),"Concentrate"},null,null,"feed_name ASC");
             if(cursor.moveToFirst()){
                 headers.add("Concentrates");
                 List<String> concentrate = new ArrayList<>();
@@ -90,7 +90,7 @@ public class OptimizerMenuActivity extends AppCompatActivity {
             }
             cursor = db.query("FEED",
                     new String[] {"feed_name, supply_amount"},
-                    "feed_type=?",new String[] {"Additive"},null,null,"feed_name ASC");
+                    "farm_id=? AND feed_type=?",new String[] {Integer.toString(Admin.farm_id),"Additive"},null,null,"feed_name ASC");
             if(cursor.moveToFirst()){
                 headers.add("Additives");
                 List<String> additive = new ArrayList<>();
@@ -127,7 +127,7 @@ public class OptimizerMenuActivity extends AppCompatActivity {
             for(int i=0;i<row-1;i+=1){
                 cursor = db.query("FEED",
                         new String[] {"feed_price, supply_amount, crude_protein, met_energy, calcium, phosphorus"},
-                        "feed_name = ?",new String[]{concentrates.get(i)},null,null,null);
+                        "farm_id=? AND feed_name = ?",new String[]{Integer.toString(Admin.farm_id),concentrates.get(i)},null,null,null);
                 if(cursor.moveToFirst()){
                     costs[i] = cursor.getFloat(0);
                     for (int j = 0; j < col; j += 1) {

@@ -47,6 +47,13 @@
     <string name="save">Save</string>
     <string name="compare">Compare</string>
     <string name="btn_upload">Choose Image</string>
+    <string name="signup_farm">Sign up for new farm</string>
+    <string name="choos_farm">Choose Farm:</string>
+    <string name="farm_details">Farm Details:</string>
+    <string name="admin_details">Admin Details:</string>
+    <string name="farm_name">Farm Name</string>
+    <string name="contact_no_hint">Contact Number (09#########)</string>
+    <string name="farm_password">Farm Password</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

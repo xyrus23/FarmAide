@@ -16,7 +16,10 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 
@@ -101,5 +104,32 @@ public class AddInventoryActivity extends AppCompatActivity {
         int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
         cursor.moveToFirst();
         return cursor.getString(column_index);
+    }
+
+    public void addInventory(View view){
+        String ingredient_name = ((EditText)findViewById(R.id.ingredient_name)).getText().toString();
+        String dm = ((EditText)findViewById(R.id.editText_dm)).getText().toString();
+        String cp = ((EditText)findViewById(R.id.editText_cp)).getText().toString();
+        String me = ((EditText)findViewById(R.id.editText_me)).getText().toString();
+        String ca = ((EditText)findViewById(R.id.editText_ca)).getText().toString();
+        String p = ((EditText)findViewById(R.id.editText_p)).getText().toString();
+        String tdn = ((EditText)findViewById(R.id.editText_tdn)).getText().toString();
+        String supply = ((EditText)findViewById(R.id.editText_supp)).getText().toString();
+        String price = ((EditText)findViewById(R.id.editText_price)).getText().toString();
+
+        boolean check = true;
+        if (ingredient_name.isEmpty()) check = false;
+        if (dm.isEmpty()) check = false;
+        if (cp.isEmpty()) check = false;
+        if (me.isEmpty()) check = false;
+        if (ca.isEmpty()) check = false;
+        if (p.isEmpty()) check = false;
+        if (tdn.isEmpty()) check = false;
+        if (supply.isEmpty()) check = false;
+        if (price.isEmpty()) check = false;
+        if (imageCaptureUri.getPath().isEmpty())
+            Toast.makeText(this, "Choose an image for the ingredient", Toast.LENGTH_SHORT).show();
+        if (!check) Toast.makeText(this, "Please fill out all the fields", Toast.LENGTH_SHORT).show();
+
     }
 }

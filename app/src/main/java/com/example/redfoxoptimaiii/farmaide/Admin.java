@@ -28,6 +28,7 @@ public class Admin extends AppCompatActivity {
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
+    public static int farm_id;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -44,6 +45,7 @@ public class Admin extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         username = getIntent().getStringExtra("username");
+        farm_id = getIntent().getIntExtra("farm_id", 0);
         TextView textView_username = (TextView) findViewById(R.id.profile_name);
         textView_username.setText(username);
 

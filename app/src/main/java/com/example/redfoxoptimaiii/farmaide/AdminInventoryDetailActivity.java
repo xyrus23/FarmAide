@@ -50,8 +50,8 @@ public class AdminInventoryDetailActivity extends AppCompatActivity {
 
             cursor = db.query("FEED",
                     new String[] {"feed_price", "supply_amount", "dry_matter", "total_digestible_nutrient", "crude_protein", "met_energy", "calcium", "phosphorus", "pic_ref"},
-                    "feed_name = ?",
-                    new String[] {feed_name},
+                    "farm_id = ? AND feed_name = ?",
+                    new String[] {Integer.toString(Admin.farm_id), feed_name},
                     null,null,null);
             if(cursor.moveToFirst()) {
                 TextView textView_feed_name = (TextView) findViewById(R.id.feed_name);

@@ -39,7 +39,7 @@ public class AdminOptimizerTab extends Fragment {
 
             cursor = db.query("RECIPE",
                     new String[]{"recipe_name","animal","animal_type","dm_req","cp_req","me_req","ca_req","p_req"},
-                    null,null,null,null,"animal ASC");
+                    "farm_id=?",new String[]{Integer.toString(Admin.farm_id)},null,null,"animal ASC");
 
             if(cursor.moveToFirst()){
                 for (int i=0;i<cursor.getCount();i+=1){

@@ -18,6 +18,7 @@ import android.widget.SimpleAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.StringTokenizer;
 
 /**
  * Created by REDFOX™ OptimaIII on 1/10/2017.
@@ -50,7 +51,9 @@ public class AdminInventoryTab extends Fragment {
 
             cursor = db.query("FEED",
                     new String[] {"feed_type"},
-                    null,null,null,null,"feed_type ASC");
+                    "farm_id = ?",
+                    new String[] {Integer.toString(Admin.farm_id)},
+                    null,null,"feed_type ASC");
 
             if(cursor.moveToFirst()){
                 for (int i=0;i<cursor.getCount();i+=1){
@@ -60,7 +63,8 @@ public class AdminInventoryTab extends Fragment {
                 for (int i=0;i<feed_types.size();i+=1){
                     cursor = db.query("FEED",
                             new String[] {"feed_name"},
-                            "feed_type=?",new String[]{feed_types.get(i)},null,null,"feed_name ASC");
+                            "farm_id=? AND feed_type=?",
+                            new String[]{Integer.toString(Admin.farm_id),feed_types.get(i)},null,null,"feed_name ASC");
                     if(cursor.moveToFirst()){
                         for (int j=0;j<cursor.getCount();j++){
                             if(!list.contains(feed_types.get(i))) list.add(feed_types.get(i));
