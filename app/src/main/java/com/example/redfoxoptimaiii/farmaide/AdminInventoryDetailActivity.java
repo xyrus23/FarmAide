@@ -5,6 +5,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -42,8 +44,9 @@ public class AdminInventoryDetailActivity extends AppCompatActivity {
 
 //        TextView username = (TextView) findViewById(R.id.profile_name);
 //        username.setText(Admin.username);
-        String feed_name = getIntent().getStringExtra("feed_name");
-
+        String feed_name = getIntent().getStringExtra("feed_name").trim();
+        Toast.makeText(this, feed_name, Toast.LENGTH_SHORT).show();
+        
         try{
             SQLiteOpenHelper FarmAideDBHelper = new FarmAideDatabaseHelper(this);
             db = FarmAideDBHelper.getReadableDatabase();
@@ -73,7 +76,9 @@ public class AdminInventoryDetailActivity extends AppCompatActivity {
                 TextView textView_p = (TextView) findViewById(R.id.p_content);
                 textView_p.setText(cursor.getString(7)+"%");
                 ImageView photo = (ImageView) findViewById(R.id.photo);
-                photo.setImageResource(cursor.getInt(8));
+                byte[] image = cursor.getBlob(8);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+                photo.setImageBitmap(bitmap);
             }
             cursor.close();
             db.close();

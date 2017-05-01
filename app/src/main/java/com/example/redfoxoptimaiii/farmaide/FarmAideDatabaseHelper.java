@@ -4,7 +4,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 /**
@@ -13,6 +19,7 @@ import java.util.ArrayList;
 
 public class FarmAideDatabaseHelper extends SQLiteOpenHelper {
 
+	Context context;
     private static final String DB_NAME = "FarmAideDB";
     private static final int DB_VERSION = 1;
 	String[] userColNames = {"user_type","username","password"};
@@ -21,9 +28,11 @@ public class FarmAideDatabaseHelper extends SQLiteOpenHelper {
 	
     FarmAideDatabaseHelper(Context context){
         super(context, DB_NAME, null, DB_VERSION);
+    	this.context = context;
     }
 
-    public void onCreate(SQLiteDatabase db) {
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+	public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE FARM ("
                 + "farm_id INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + "farm_name TEXT,"
@@ -58,10 +67,10 @@ public class FarmAideDatabaseHelper extends SQLiteOpenHelper {
                 + "calcium REAL, "
                 + "phosphorus REAL, "
                 + "pic_ref INTEGER);");
-        insertFeed(db, 1, "Concentrate", "Yellow Corn", 87, 75.2, 16, 23, .078, 33.50, .0007, .0025, R.drawable.concentrate_yellowcorn);
-        insertFeed(db, 1, "Concentrate", "Cassava Meal", 86, 84, 8, 33.56, .018, 28.00, .0012, .001, R.drawable.concentrate_cassavameal);
-        insertFeed(db, 1, "Roughage", "Napier Grass", 22, 55, 0, 500.64, .63, .1031, .003, .0025, R.drawable.roughage_napier);
-		insertFeed(db, 1, "Concentrate", "Rice Bran", 89, 77.7, 10, 25, .125, 30.00, .0008, .016, R.drawable.concentrate_ricebran);
+        insertFeed(db, 1, "Concentrate", "Yellow Corn", 87, 75.2, 16, 23, .078, 33.50, .0007, .0025, convertDrawableToBye(R.drawable.concentrate_yellowcorn));
+		insertFeed(db, 1, "Concentrate", "Rice Bran", 89, 77.7, 10, 25, .125, 30.00, .0008, .016, convertDrawableToBye(R.drawable.concentrate_ricebran));
+        insertFeed(db, 1, "Concentrate", "Cassava Meal", 86, 84, 8, 33.56, .018, 28.00, .0012, .001, convertDrawableToBye(R.drawable.concentrate_cassavameal));
+        insertFeed(db, 1, "Roughage", "Napier Grass", 22, 55, 0, 500.64, .63, .1031, .003, .0025, convertDrawableToBye(R.drawable.roughage_napier));
 
 		db.execSQL("CREATE TABLE RECIPE ("
                 + "recipe_id INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -110,6 +119,16 @@ public class FarmAideDatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+	public byte[] convertDrawableToBye(int picref){
+		Drawable drawable = context.getResources().getDrawable(picref);
+		Bitmap bitmap = ((BitmapDrawable)drawable).getBitmap();
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+		byte[] buffer = out.toByteArray();
+		return buffer;
+	}
+
     public void insertFarm(SQLiteDatabase db, String farm_name, String password, String contact_no){
         ContentValues farmValues = new ContentValues();
 
@@ -128,7 +147,7 @@ public class FarmAideDatabaseHelper extends SQLiteOpenHelper {
         userValues.put("password", password);
         db.insert("USER", null, userValues);
     }
-	public void insertFeed(SQLiteDatabase db, int farm_id, String feed_type, String feed_name, double dry_matter, double total_digestible_nutrient, double feed_price, double supply_amount, double crude_protein, double met_energy, double calcium, double phosphorus, int pic_ref){
+	public void insertFeed(SQLiteDatabase db, int farm_id, String feed_type, String feed_name, double dry_matter, double total_digestible_nutrient, double feed_price, double supply_amount, double crude_protein, double met_energy, double calcium, double phosphorus, byte[] pic_ref){
         ContentValues feedValues = new ContentValues();
 
         feedValues.put("farm_id", farm_id);

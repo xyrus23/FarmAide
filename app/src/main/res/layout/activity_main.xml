@@ -80,8 +80,7 @@
             android:layout_alignRight="@+id/button_admin"
             android:layout_alignStart="@+id/button_admin"
             android:layout_marginBottom="15dp"
-            android:entries="@array/listView_entries"
-            android:theme="@style/Widget.AppCompat.Spinner.DropDown" />
+            android:entries="@array/listView_entries" />
     </LinearLayout>
 
     <TextView
