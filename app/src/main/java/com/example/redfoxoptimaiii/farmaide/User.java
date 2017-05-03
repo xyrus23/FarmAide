@@ -26,6 +26,7 @@ public class User extends AppCompatActivity {
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
     public static int farm_id;
+    public static String username;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -40,9 +41,10 @@ public class User extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        TextView username = (TextView) findViewById(R.id.profile_name);
-        username.setText(getIntent().getStringExtra("username"));
         farm_id = getIntent().getIntExtra("farm_id", 0);
+        username = getIntent().getStringExtra("username");
+        TextView textView_username = (TextView) findViewById(R.id.profile_name);
+        textView_username.setText(username);
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -109,7 +111,7 @@ public class User extends AppCompatActivity {
                     UserRoughageTab tab2 = new UserRoughageTab();
                     return tab2;
                 case 2:
-                    UserSupplierTab tab3 = new UserSupplierTab();
+                    UserAdditiveTab tab3 = new UserAdditiveTab();
                     return tab3;
                 default:
                     return null;
@@ -130,7 +132,7 @@ public class User extends AppCompatActivity {
                 case 1:
                     return "Roughage";
                 case 2:
-                    return "Supplier";
+                    return "Additive";
             }
             return null;
         }

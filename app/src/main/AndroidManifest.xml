@@ -44,7 +44,10 @@
         <activity android:name=".AddInventoryActivity" />
         <activity android:name=".Signup" />
         <activity android:name=".OptimizerSolutionActivity" />
-        <activity android:name=".UserSignup"></activity>
+        <activity android:name=".UserSignup" />
+        <activity android:name=".AddRecipeActivity" />
+        <activity android:name=".TransactionsActivity" />
+        <activity android:name=".EditInventoryActivity"></activity>
     </application>
 
 </manifest>

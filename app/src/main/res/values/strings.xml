@@ -25,7 +25,7 @@
     <string name="price_label">Price:</string>
     <string name="avsupply_label">Available Supply:</string>
     <string name="add_btn">Add</string>
-    <string name="sub_btn">Subtract</string>
+    <string name="sub_btn">Minus</string>
     <string name="edit_btn">Edit</string>
     <string name="del_btn">Delete</string>
     <string-array name="listView_entries"></string-array>
@@ -41,12 +41,66 @@
         <item>Concentrate</item>
         <item>Roughage</item>
     </string-array>
-    <string name="amount">Amount</string>
-    <string name="total_cost">Total Cost:</string>
+    <string name="amount">Amount: </string>
+    <string name="total_cost">Total Cost: </string>
     <string name="cost">Cost</string>
+    <string name="mod_amount">Modify Supply: </string>
     <string name="save">Save</string>
     <string name="compare">Compare</string>
     <string name="btn_upload">Choose Image</string>
+    <string name="addRecipe">Add Recipe</string>
+    <string name="recipe_label">Recipe Name</string>
+    <string name="animal_label">Animal: </string>
+    <string name="animal_type">Animal Type: </string>
+    <string name="animal_criteria">Criteria: </string>
+    <string name="dm_req">Dry Mater Req: </string>
+    <string name="cp_req">Crude Protein Req: </string>
+    <string name="me_req">Metabolizable Energy Req: </string>
+    <string name="ca_req">Calcium Req: </string>
+    <string name="p_req">Phosphorus Req: </string>
+    <string-array name="animal_types">
+        <item>Poultry</item>
+        <item>Swine</item>
+        <item>Ruminants</item>
+    </string-array>
+    <string-array name="poultry_types">
+        <item>Broiler</item>
+        <item>Egg-type</item>
+    </string-array>
+    <string-array name="broiler_egg_types">
+        <item>Booster</item>
+        <item>Starter</item>
+        <item>Finisher</item>
+        <item>Breeder</item>
+    </string-array>
+    <string-array name="swine_types">
+        <item>Meat-type</item>
+    </string-array>
+    <string-array name="meat_types">
+        <item>Starter</item>
+        <item>Grower</item>
+        <item>Finisher</item>
+        <item>Gestating of Pregnant</item>
+        <item>Lactating</item>
+    </string-array>
+    <string-array name="ruminants_type">
+        <item>Beef-type</item>
+        <item>Dairy-type</item>
+    </string-array>
+    <string-array name="beef_dairy_types">
+        <item>Calves</item>
+        <item>Growers</item>
+        <item>Pregnant</item>
+        <item>Lactating</item>
+        <item>Bulls</item>
+    </string-array>
+    <string-array name="all_animal_types">
+        <item>[P] Broiler</item>
+        <item>[P] Egg-type</item>
+        <item>[S] Meat-type</item>
+        <item>[R] Beef-type</item>
+        <item>[R] Dairy-type</item>
+    </string-array>
     <string name="signup_farm">Sign up for new farm</string>
     <string name="choos_farm">Choose Farm:</string>
     <string name="farm_details">Farm Details:</string>
@@ -54,6 +108,10 @@
     <string name="farm_name">Farm Name</string>
     <string name="contact_no_hint">Contact Number (09#########)</string>
     <string name="farm_password">Farm Password</string>
+    <string name="edit_supply">Edit Supply</string>
+    <string name="edit_all">Edit All</string>
+    <string name="edit_ing">Edit Ingredient</string>
+    <string name="transactions">Transactions</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

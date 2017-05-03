@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +33,15 @@ public class AdminOptimizerTab extends Fragment {
         ArrayList<String> animal = new ArrayList<>();
         ArrayList<String> animal_type = new ArrayList<>();
         final ArrayList<Object> animals = new ArrayList<>();
+
+        FloatingActionButton fab_recipe = (FloatingActionButton) rootView.findViewById(R.id.fab_recipe);
+        fab_recipe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), AddRecipeActivity.class);
+                startActivity(intent);
+            }
+        });
 
         try {
             SQLiteOpenHelper FarmAideDBHelper = new FarmAideDatabaseHelper(getContext());

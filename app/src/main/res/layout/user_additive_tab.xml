@@ -8,12 +8,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.redfoxoptimaiii.farmaide.User">
 
-    <ExpandableListView
-        android:id="@+id/expandable_listView"
+    <ListView
+        android:id="@+id/listView_userAdditive"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
-
+        android:layout_alignParentTop="true"
+        android:entries="@array/listView_entries" />
 </RelativeLayout>

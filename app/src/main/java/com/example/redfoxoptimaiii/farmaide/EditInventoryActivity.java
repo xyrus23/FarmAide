@@ -28,7 +28,7 @@ import android.widget.Toast;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 
-public class AddInventoryActivity extends AppCompatActivity {
+public class EditInventoryActivity extends AppCompatActivity {
 
     private SQLiteDatabase db;
     private Cursor cursor;
@@ -37,11 +37,12 @@ public class AddInventoryActivity extends AppCompatActivity {
     private static final int PICK_FROM_CAMERA = 1;
     private static final int PICK_FROM_FILE = 2;
     Button btn_upload;
+    private int feed_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_inventory);
+        setContentView(R.layout.activity_edit_inventory);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -50,6 +51,46 @@ public class AddInventoryActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+        EditText editText_feed_name = (EditText)findViewById(R.id.ingredient_name);
+        EditText editText_dm = (EditText)findViewById(R.id.editText_dm);
+        EditText editText_cp = (EditText)findViewById(R.id.editText_cp);
+        EditText editText_me = (EditText)findViewById(R.id.editText_me);
+        EditText editText_ca = (EditText)findViewById(R.id.editText_ca);
+        EditText editText_p = (EditText)findViewById(R.id.editText_p);
+        EditText editText_tdn = (EditText)findViewById(R.id.editText_tdn);
+        EditText editText_supply = (EditText)findViewById(R.id.editText_supp);
+        EditText editText_price = (EditText)findViewById(R.id.editText_price);
+        mImageView = (ImageView) findViewById(R.id.imageView_pic);
+
+        String feed_name = getIntent().getStringExtra("feed_name");
+        try{
+            byte[] pic;
+            SQLiteOpenHelper FarmAideDBHelper = new FarmAideDatabaseHelper(this);
+            db = FarmAideDBHelper.getReadableDatabase();
+            cursor = db.query("FEED",
+                    new String[]{"feed_id,feed_name,dry_matter,total_digestible_nutrient,feed_price,supply_amount,crude_protein," +
+                            "met_energy,calcium,phosphorus,pic_ref"},
+                    "farm_id=? AND feed_name=?",
+                    new String[]{Integer.toString(Admin.farm_id),feed_name},
+                    null, null, null);
+            if (cursor.moveToFirst()){
+                feed_id = cursor.getInt(0);
+                editText_feed_name.setText(cursor.getString(1));
+                editText_dm.setText(cursor.getString(2));
+                editText_cp.setText(cursor.getString(6));
+                editText_me.setText(cursor.getString(7));
+                editText_ca.setText(cursor.getString(8));
+                editText_p.setText(cursor.getString(9));
+                editText_tdn.setText(cursor.getString(3));
+                editText_supply.setText(cursor.getString(5));
+                editText_price.setText(cursor.getString(4));
+                pic = cursor.getBlob(10);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(pic , 0, pic.length);
+                mImageView.setImageBitmap(bitmap);
+            }
+        } catch (SQLiteException e) {}
+
 
         final String[] items = new String[] {"Take Photo", "Choose Photo"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.select_dialog_item,items);
@@ -113,7 +154,7 @@ public class AddInventoryActivity extends AppCompatActivity {
         return cursor.getString(column_index);
     }
 
-    public void addInventory(View view){
+    public void editInventory(View view){
         TextInputLayout input_name = (TextInputLayout) findViewById(R.id.input_ingredient_name);
         String feed_type = ((Spinner) findViewById(R.id.spinner_type)).getSelectedItem().toString();
         String feed_name = ((EditText)findViewById(R.id.ingredient_name)).getText().toString();
@@ -136,33 +177,29 @@ public class AddInventoryActivity extends AppCompatActivity {
         if (tdn.isEmpty()) check = false;
         if (supply.isEmpty()) check = false;
         if (price.isEmpty()) check = false;
-        if (imageCaptureUri==null || imageCaptureUri.getPath().isEmpty()) {
-            Toast.makeText(this, "Choose an image for the ingredient", Toast.LENGTH_SHORT).show();
-            check = false;
-        }
         if (!check) Toast.makeText(this, "Please fill out all the fields", Toast.LENGTH_SHORT).show();
         else{
             try{
                 SQLiteOpenHelper FarmAideDBHelper = new FarmAideDatabaseHelper(this);
                 db = FarmAideDBHelper.getReadableDatabase();
                 cursor = db.query("FEED",
-                        new String[]{"feed_name"},
+                        new String[]{"feed_id, feed_name"},
                         "farm_id=? AND feed_name=?",
                         new String[]{Integer.toString(Admin.farm_id), feed_name},
                         null, null, null);
                 if (cursor.moveToFirst()){
-                    input_name.setError("Feed name already exists");
-                    check = false;
+                    if (cursor.getInt(0)!=feed_id) {
+                        input_name.setError("Feed name already exists");
+                        check = false;
+                    }
                 }
                 if(check){
-                    ((FarmAideDatabaseHelper)FarmAideDBHelper).insertFeed(db, Admin.farm_id,feed_type,feed_name,Double.parseDouble(dm),
+                    ((FarmAideDatabaseHelper)FarmAideDBHelper).updateFeed(db,feed_id,feed_type,feed_name,Double.parseDouble(dm),
                             Double.parseDouble(tdn),Double.parseDouble(price),Double.parseDouble(supply),Double.parseDouble(cp),Double.parseDouble(me),
                             Double.parseDouble(ca),Double.parseDouble(p),imageViewToByte(mImageView));
-                    Toast.makeText(this, "Successfully added ingredient", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(this, Admin.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    intent.putExtra("username", Admin.username);
-                    intent.putExtra("farm_id", Admin.farm_id);
+                    Toast.makeText(this, "Successfully edited ingredient", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(this, AdminInventoryDetailActivity.class);
+                    intent.putExtra("feed_name", feed_name);
                     startActivity(intent);
                     finish();
                 }

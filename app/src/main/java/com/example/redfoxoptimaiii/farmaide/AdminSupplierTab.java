@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,7 +22,7 @@ public class AdminSupplierTab extends Fragment {
     HashMap<String,List<String>> listHashMap = new HashMap<>();
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.user_supplier_tab, container, false);
+        View rootView = inflater.inflate(R.layout.admin_supplier_tab, container, false);
         List<String> headers = new ArrayList<>();
         List<String> contacts = new ArrayList<>();
         HashMap<String,List<String>> hashSupply = new HashMap<>();

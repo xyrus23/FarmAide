@@ -10,23 +10,22 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import java.util.Date;
 
-import java.util.ArrayList;
-
-import static java.security.AccessController.getContext;
 
 public class AdminInventoryDetailActivity extends AppCompatActivity {
 
     private SQLiteDatabase db;
     private Cursor cursor;
+    private String feed_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +43,8 @@ public class AdminInventoryDetailActivity extends AppCompatActivity {
 
 //        TextView username = (TextView) findViewById(R.id.profile_name);
 //        username.setText(Admin.username);
-        String feed_name = getIntent().getStringExtra("feed_name").trim();
-        Toast.makeText(this, feed_name, Toast.LENGTH_SHORT).show();
-        
+        feed_name = getIntent().getStringExtra("feed_name").trim();
+
         try{
             SQLiteOpenHelper FarmAideDBHelper = new FarmAideDatabaseHelper(this);
             db = FarmAideDBHelper.getReadableDatabase();
@@ -85,19 +83,92 @@ public class AdminInventoryDetailActivity extends AppCompatActivity {
         } catch(SQLiteException e){ }
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_admin, menu);
-//        menu.getItem(0).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-//            @Override
-//            public boolean onMenuItemClick(MenuItem item) {
-//                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//                startActivity(intent);
-//                finish();
-//                return false;
-//            }
-//        });
-//        return true;
-//    }
+    public void onClickEditSupply(View view){
+        Button btn_edit_supply = (Button) findViewById(R.id.btn_edit_supply);
+        Button btn_edit_all = (Button) findViewById(R.id.btn_edit_all);
+        LinearLayout modifySupply = (LinearLayout) findViewById(R.id.modify_supply);
+        btn_edit_supply.setVisibility(View.GONE);
+        btn_edit_all.setVisibility(View.GONE);
+        modifySupply.setVisibility(View.VISIBLE);
+    }
+
+    public void onClickEditAll(View view){
+        Intent intent = new Intent(this, EditInventoryActivity.class);
+        intent.putExtra("feed_name", feed_name);
+        startActivity(intent);
+    }
+
+    public void addSupply(View view){
+        String value_string = ((EditText)findViewById(R.id.editText_amount)).getText().toString();
+        if (value_string.isEmpty()) Toast.makeText(this, "Please enter amount", Toast.LENGTH_SHORT).show();
+        else {
+            Double value = Double.parseDouble(value_string);
+            try {
+                FarmAideDatabaseHelper FarmAideDBHelper = new FarmAideDatabaseHelper(this);
+                db = FarmAideDBHelper.getReadableDatabase();
+                cursor = db.query("FEED",
+                        new String[]{"feed_id, supply_amount"},
+                        "farm_id=? AND feed_name=?",
+                        new String[]{Integer.toString(Admin.farm_id), feed_name},
+                        null, null, null);
+                if (cursor.moveToFirst()) {
+                    FarmAideDBHelper.updateFeedSupply(db, cursor.getInt(0), (cursor.getDouble(1) + value));
+                    Toast.makeText(this, "Successfully updated supply", Toast.LENGTH_SHORT).show();
+                    cursor = db.query("USER",
+                            new String[]{"user_id"},
+                            "farm_id=? AND username=?",
+                            new String[]{Integer.toString(Admin.farm_id), Admin.username},
+                            null, null, null);
+                    if (cursor.moveToFirst()) {
+                        String time_stamp = new Date().toString();
+                        FarmAideDBHelper.insertTransaction(db, cursor.getInt(0), Admin.farm_id, time_stamp, "Added " + value_string + "kg supply to "+feed_name);
+                    }
+                    finish();
+                    startActivity(getIntent());
+                }
+                cursor.close();
+                db.close();
+            } catch (SQLiteException e) {
+            }
+        }
+    }
+
+    public void subSupply(View view){
+        String value_string = ((EditText)findViewById(R.id.editText_amount)).getText().toString();
+        if (value_string.isEmpty()) Toast.makeText(this, "Please enter amount", Toast.LENGTH_SHORT).show();
+        else {
+            Double value = Double.parseDouble(value_string);
+            try {
+                FarmAideDatabaseHelper FarmAideDBHelper = new FarmAideDatabaseHelper(this);
+                db = FarmAideDBHelper.getReadableDatabase();
+                cursor = db.query("FEED",
+                        new String[]{"feed_id, supply_amount"},
+                        "farm_id=? AND feed_name=?",
+                        new String[]{Integer.toString(Admin.farm_id), feed_name},
+                        null, null, null);
+                if (cursor.moveToFirst()) {
+                    if (cursor.getDouble(1) <= value)
+                        Toast.makeText(this, "Amount is greater than available supply", Toast.LENGTH_SHORT).show();
+                    else {
+                        FarmAideDBHelper.updateFeedSupply(db, cursor.getInt(0), (cursor.getDouble(1) - value));
+                        Toast.makeText(this, "Successfully updated supply", Toast.LENGTH_SHORT).show();
+                        cursor = db.query("USER",
+                                new String[]{"user_id"},
+                                "farm_id=? AND username=?",
+                                new String[]{Integer.toString(Admin.farm_id), Admin.username},
+                                null, null, null);
+                        if (cursor.moveToFirst()) {
+                            String time_stamp = new Date().toString();
+                            FarmAideDBHelper.insertTransaction(db, cursor.getInt(0), Admin.farm_id, time_stamp, "Consumed " + value_string + "kg supply from "+feed_name);
+                        }
+                        finish();
+                        startActivity(getIntent());
+                    }
+                }
+                cursor.close();
+                db.close();
+            } catch (SQLiteException e) {
+            }
+        }
+    }
 }

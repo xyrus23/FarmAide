@@ -109,6 +109,14 @@ public class FarmAideDatabaseHelper extends SQLiteOpenHelper {
 //        insertRecipe(db, "Lactating", "Ruminants", "Dairy Type");
 //        insertRecipe(db, "Bulls", "Ruminants", "Dairy Type");
 
+		db.execSQL("CREATE TABLE TRANSACTIONS ("
+				+ "transaction_id INTEGER PRIMARY KEY AUTOINCREMENT,"
+				+ "user_id INTEGER,"
+				+ "farm_id INTEGER,"
+				+ "time_stamp TEXT, "
+				+ "note TEXT);");
+		//insert shit
+
     }
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
         if(oldVersion == 1){
@@ -179,6 +187,16 @@ public class FarmAideDatabaseHelper extends SQLiteOpenHelper {
         recipeValues.put("p_req", p_req);
         db.insert("RECIPE", null, recipeValues);
     }
+
+    public void insertTransaction(SQLiteDatabase db, int user_id, int farm_id, String time_stamp, String note){
+		ContentValues transactionValues = new ContentValues();
+
+		transactionValues.put("user_id", user_id);
+		transactionValues.put("farm_id", farm_id);
+		transactionValues.put("time_stamp", time_stamp);
+		transactionValues.put("note", note);
+		db.insert("TRANSACTIONS", null, transactionValues);
+	}
 		
 	//update  user
 	public void updateUser(SQLiteDatabase db, Integer id, String username, String password){
@@ -198,40 +216,29 @@ public class FarmAideDatabaseHelper extends SQLiteOpenHelper {
 	}
 	
 	//update feed
-	public void updateFeed(SQLiteDatabase db, Integer id, String feed_type, String feed_name, String dry_matter, double feed_price, double supply_amount, double crude_protein, double met_energy, double calcium, double phosphorus, int pic_ref){
-		ContentValues feedVal = new ContentValues();
-		ArrayList<String> updateFeedVal = new ArrayList<>();
-		
-		updateFeedVal.add(feed_type);
-		updateFeedVal.add(feed_name);
-		updateFeedVal.add(dry_matter);
-		updateFeedVal.add(Double.toString(feed_price));
-		updateFeedVal.add(Double.toString(supply_amount));
-		updateFeedVal.add(Double.toString(crude_protein));
-		updateFeedVal.add(Double.toString(met_energy));
-		updateFeedVal.add(Double.toString(calcium));
-		updateFeedVal.add(Double.toString(phosphorus));
-		updateFeedVal.add(Integer.toString(pic_ref));
-		
-		for(int i=0; i<10; i++){
-			if(updateFeedVal.get(i) != null){
-				if(i >= 3){
-					if(i == 9){
-						//translate back to Integer
-						feedVal.put(userColNames[i], updateFeedVal.get(i));
-					}
-					else{
-						//translate back to Double
-						feedVal.put(userColNames[i], updateFeedVal.get(i));
-					}
-				}
-				else{
-					feedVal.put(userColNames[i], updateFeedVal.get(i));
-				}
-			}
-		}
-		
-		db.update("FEED", feedVal, "id = ?", new String[] {Integer.toString(id)} );
+	public void updateFeed(SQLiteDatabase db, Integer id, String feed_type, String feed_name, double dry_matter,
+						   double total_digestible_nutrient, double feed_price, double supply_amount, double crude_protein,
+						   double met_energy, double calcium, double phosphorus, byte[] pic_ref){
+		ContentValues feedValues = new ContentValues();
+
+		feedValues.put("feed_type", feed_type);
+		feedValues.put("feed_name", feed_name);
+		feedValues.put("dry_matter", dry_matter);
+		feedValues.put("total_digestible_nutrient", total_digestible_nutrient);
+		feedValues.put("feed_price", feed_price);
+		feedValues.put("supply_amount", supply_amount);
+		feedValues.put("crude_protein", crude_protein);
+		feedValues.put("met_energy", met_energy);
+		feedValues.put("calcium", calcium);
+		feedValues.put("phosphorus", phosphorus);
+		feedValues.put("pic_ref", pic_ref);
+		db.update("FEED", feedValues, "feed_id = ?", new String[] {Integer.toString(id)});
+	}
+
+	public void updateFeedSupply(SQLiteDatabase db, Integer id, Double supply_amount){
+		ContentValues amount = new ContentValues();
+		amount.put("supply_amount", supply_amount);
+		db.update("FEED", amount, "feed_id = ?", new String[] {Integer.toString(id)});
 	}
 	
 	//update recipe

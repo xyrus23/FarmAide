@@ -37,9 +37,9 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = user_type.equals("admin") ? new Intent(this, Admin.class) : new Intent(this, User.class);
         EditText username = (EditText)findViewById(R.id.username);
         EditText password = (EditText)findViewById(R.id.password);
-        if(onSuccessLogin(username.getText().toString(), password.getText().toString())){
+        if(onSuccessLogin(username.getText().toString().trim(), password.getText().toString())){
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            intent.putExtra("username", username.getText().toString());
+            intent.putExtra("username", username.getText().toString().trim());
             intent.putExtra("farm_id", farm_id);
             startActivity(intent);
         }
