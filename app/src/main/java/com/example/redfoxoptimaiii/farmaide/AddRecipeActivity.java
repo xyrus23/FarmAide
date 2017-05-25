@@ -2,6 +2,7 @@ package com.example.redfoxoptimaiii.farmaide;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.DataSetObserver;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -10,8 +11,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 public class AddRecipeActivity extends AppCompatActivity {
@@ -32,6 +37,35 @@ public class AddRecipeActivity extends AppCompatActivity {
             }
         });
 
+        final Spinner spinner_animal = (Spinner) findViewById(R.id.spinner_animal);
+        final Spinner spinner_animal_type = (Spinner) findViewById(R.id.spinner_animal_type);
+        spinner_animal.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ArrayAdapter<CharSequence> adapter;
+                switch (spinner_animal.getSelectedItemPosition()){
+                    case 0: adapter = ArrayAdapter.createFromResource(AddRecipeActivity.this, R.array.poultry_types, android.R.layout.simple_spinner_item);
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spinner_animal_type.setAdapter(adapter);
+                        break;
+                    case 1: adapter = ArrayAdapter.createFromResource(AddRecipeActivity.this, R.array.swine_types, android.R.layout.simple_spinner_item);
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spinner_animal_type.setAdapter(adapter);
+                        break;
+                    case 2: adapter = ArrayAdapter.createFromResource(AddRecipeActivity.this, R.array.ruminants_type, android.R.layout.simple_spinner_item);
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spinner_animal_type.setAdapter(adapter);
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(AddRecipeActivity.this, R.array.poultry_types, android.R.layout.simple_spinner_dropdown_item);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner_animal_type.setAdapter(adapter);
+            }
+        });
     }
 
     public void addRecipe(View view){
@@ -44,10 +78,11 @@ public class AddRecipeActivity extends AppCompatActivity {
         String me = ((EditText)findViewById(R.id.recipe_me)).getText().toString();
         String ca = ((EditText)findViewById(R.id.recipe_ca)).getText().toString();
         String p = ((EditText)findViewById(R.id.recipe_p)).getText().toString();
+        String animal_weight = ((EditText)findViewById(R.id.recipe_aw)).getText().toString();
         input_recipe_name.setErrorEnabled(false);
         boolean check = true;
         if (Admin.farm_id<0 || recipe_name.isEmpty() || animal.isEmpty() || animal_type.isEmpty() || dm.isEmpty() || cp.isEmpty() ||
-                me.isEmpty() || ca.isEmpty() || p.isEmpty()) check = false;
+                me.isEmpty() || ca.isEmpty() || p.isEmpty() || animal_weight.isEmpty()) check = false;
         if (!check) Toast.makeText(this, "Please fill out all the fields", Toast.LENGTH_SHORT).show();
         else{
             Double dm_req = Double.parseDouble(dm);
@@ -55,9 +90,10 @@ public class AddRecipeActivity extends AppCompatActivity {
             Double me_req = Double.parseDouble(me);
             Double ca_req = Double.parseDouble(ca);
             Double p_req = Double.parseDouble(p);
+            Double aw = Double.parseDouble(animal_weight);
             try {
                 SQLiteOpenHelper FarmAideDBHelper = new FarmAideDatabaseHelper(this);
-                db = FarmAideDBHelper.getReadableDatabase();
+                db = FarmAideDBHelper.getWritableDatabase();
 
                 cursor = db.query("RECIPE",
                         new String[] {"recipe_name"},
@@ -71,12 +107,13 @@ public class AddRecipeActivity extends AppCompatActivity {
                 }
 
                 if(check){
-                    ((FarmAideDatabaseHelper)FarmAideDBHelper).insertRecipe(db, Admin.farm_id, recipe_name, animal, animal_type, dm_req, cp_req,me_req, ca_req, p_req);
-                    Intent intent = new Intent(this, Admin.class);
+                    ((FarmAideDatabaseHelper)FarmAideDBHelper).insertRecipe(db, Admin.farm_id, recipe_name, animal, animal_type, dm_req, cp_req,me_req, ca_req, p_req, aw);
                     Toast.makeText(this, "Successfully added recipe", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(this, Admin.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     intent.putExtra("username", Admin.username);
                     intent.putExtra("farm_id", Admin.farm_id);
+                    intent.putExtra("position", 2);
                     startActivity(intent);
                     finish();
                 }

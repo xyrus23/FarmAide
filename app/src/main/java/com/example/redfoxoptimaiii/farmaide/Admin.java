@@ -12,10 +12,8 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
 
 public class Admin extends AppCompatActivity {
 
@@ -29,12 +27,14 @@ public class Admin extends AppCompatActivity {
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
     public static int farm_id;
-
+    public static String[] months = new String[]{"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
     /**
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
     public static String username;
+    public String[] tabs = new String[]{"Inventory","Supplier","Optimizer","Predictor","Users"};
+    public int[] icons = new int[]{R.drawable.icon_inventory,R.drawable.icon_supplier,R.drawable.icon_optimizer,R.drawable.icon_predictor,R.drawable.icon_users2};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +46,7 @@ public class Admin extends AppCompatActivity {
 
         username = getIntent().getStringExtra("username");
         farm_id = getIntent().getIntExtra("farm_id", 0);
+        int position = getIntent().getIntExtra("position", 0);
         TextView textView_username = (TextView) findViewById(R.id.profile_name);
         textView_username.setText(username);
 
@@ -56,9 +57,31 @@ public class Admin extends AppCompatActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
+        mViewPager.setCurrentItem(position);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
+        tabLayout.getTabAt(0).setText(tabs[0]);
+        for (int i=1;i<tabLayout.getTabCount();i+=1) {
+            tabLayout.getTabAt(i).setIcon(icons[i]);
+        }
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                tab.setIcon(null);
+                tab.setText(tabs[tab.getPosition()]);
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                tab.setIcon(icons[tab.getPosition()]);
+                tab.setText(null);
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 
     @Override
@@ -101,7 +124,6 @@ public class Admin extends AppCompatActivity {
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
-
         @Override
         public Fragment getItem(int position) {
             switch (position) {
@@ -115,8 +137,11 @@ public class Admin extends AppCompatActivity {
                     AdminOptimizerTab tab3 = new AdminOptimizerTab();
                     return tab3;
                 case 3:
-                    AdminUserTab tab4 = new AdminUserTab();
+                    AdminPredictorTab tab4 = new AdminPredictorTab();
                     return tab4;
+                case 4:
+                    AdminUserTab tab5 = new AdminUserTab();
+                    return tab5;
                 default:
                     return null;
             }
@@ -124,22 +149,12 @@ public class Admin extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 4 total pages.
-            return 4;
+            // Show 5 total pages.
+            return 5;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                    return "Inventory";
-                case 1:
-                    return "Supplier";
-                case 2:
-                    return "Optimizer";
-                case 3:
-                    return "Users";
-            }
             return null;
         }
     }

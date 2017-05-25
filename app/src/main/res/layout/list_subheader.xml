@@ -11,7 +11,7 @@
         android:background="@color/colorPrimary"
         android:padding="5dp"
         android:text="TextView"
-        android:textAlignment="viewStart"
+        android:textAlignment="center"
         android:textAppearance="@android:style/TextAppearance.Material.Medium"
         android:textSize="18sp"
         android:textStyle="italic"

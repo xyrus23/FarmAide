@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.StringTokenizer;
@@ -27,14 +28,16 @@ import java.util.StringTokenizer;
 public class AdminInventoryTab extends Fragment {
 
     private SQLiteDatabase db;
-    private Cursor cursor;
+    private Cursor cursor, cursor2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.admin_inventory_tab, container, false);
+
         final ArrayList<String> feed_names = new ArrayList<>();
         final ArrayList<String> list = new ArrayList<>();
         ArrayList<String> feed_types = new ArrayList<>();
+        final ArrayList<byte[]> pics = new ArrayList<>();
 
         FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -61,21 +64,26 @@ public class AdminInventoryTab extends Fragment {
                     cursor.moveToNext();
                 }
                 for (int i=0;i<feed_types.size();i+=1){
-                    cursor = db.query("FEED",
-                            new String[] {"feed_name"},
+                     cursor2 = db.query("FEED",
+                            new String[] {"feed_name","pic_ref"},
                             "farm_id=? AND feed_type=?",
                             new String[]{Integer.toString(Admin.farm_id),feed_types.get(i)},null,null,"feed_name ASC");
-                    if(cursor.moveToFirst()){
-                        for (int j=0;j<cursor.getCount();j++){
-                            if(!list.contains(feed_types.get(i))) list.add(feed_types.get(i));
-                            list.add(cursor.getString(0));
-                            feed_names.add(cursor.getString(0));
-                            cursor.moveToNext();
+                    if(cursor2.moveToFirst()){
+                        for (int j=0;j<cursor2.getCount();j++){
+                            if(!list.contains(feed_types.get(i))){
+                                list.add(feed_types.get(i));
+                                pics.add(null);
+                            }
+                            list.add(cursor2.getString(0));
+                            feed_names.add(cursor2.getString(0));
+                            pics.add(cursor2.getBlob(1));
+                            cursor2.moveToNext();
                         }
                     }
+                    cursor2.close();
                 }
                 ListView listView = (ListView) rootView.findViewById(R.id.listView_adminInventory);
-                listView.setAdapter(new InventoryAdapter(getContext(),list,feed_names,feed_types));
+                listView.setAdapter(new InventoryAdapter(getContext(),list,feed_names,feed_types,pics));
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -87,7 +95,6 @@ public class AdminInventoryTab extends Fragment {
                     }
                 });
             }
-
             cursor.close();
             db.close();
         } catch (SQLiteException e) {}

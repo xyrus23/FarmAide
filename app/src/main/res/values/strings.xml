@@ -7,8 +7,9 @@
     <string name="input_password">Password</string>
     <string name="input_confirm_password">Confirm Password</string>
     <string name="loginBtn">Login</string>
-    <string name="admin">Admin</string>W
+    <string name="admin">Admin</string>
     <string name="user">User</string>
+    <string name="supplier">Supplier</string>
     <string name="signup">Sign Up</string>
     <string name="opti_label">Optimizer</string>
     <string name="inventory_label">Inventory</string>
@@ -43,6 +44,8 @@
     </string-array>
     <string name="amount">Amount: </string>
     <string name="total_cost">Total Cost: </string>
+    <string name="total_cost_per_head">Total Cost Per Head:</string>
+    <string name="total_animals">Inventory Capacity:</string>
     <string name="cost">Cost</string>
     <string name="mod_amount">Modify Supply: </string>
     <string name="save">Save</string>
@@ -53,11 +56,12 @@
     <string name="animal_label">Animal: </string>
     <string name="animal_type">Animal Type: </string>
     <string name="animal_criteria">Criteria: </string>
-    <string name="dm_req">Dry Mater Req: </string>
+    <string name="dm_req">Dry Matter Req: </string>
     <string name="cp_req">Crude Protein Req: </string>
     <string name="me_req">Metabolizable Energy Req: </string>
     <string name="ca_req">Calcium Req: </string>
     <string name="p_req">Phosphorus Req: </string>
+    <string name="animal_weight">Animal Weight:</string>
     <string-array name="animal_types">
         <item>Poultry</item>
         <item>Swine</item>
@@ -74,7 +78,7 @@
         <item>Breeder</item>
     </string-array>
     <string-array name="swine_types">
-        <item>Meat-type</item>
+        <item>Meat Type</item>
     </string-array>
     <string-array name="meat_types">
         <item>Starter</item>
@@ -101,19 +105,37 @@
         <item>[R] Beef-type</item>
         <item>[R] Dairy-type</item>
     </string-array>
-    <string name="signup_farm">Sign up for new farm</string>
-    <string name="choos_farm">Choose Farm:</string>
-    <string name="farm_details">Farm Details:</string>
+    <string name="signup_farm">Sign up for new farm/supplier</string>
+    <string name="choose_farm">Choose Farm/Supplier:</string>
+    <string name="farm_details">Farm/Supplier Details:</string>
     <string name="admin_details">Admin Details:</string>
-    <string name="farm_name">Farm Name</string>
+    <string name="farm_name">Farm/Supplier Name</string>
     <string name="contact_no_hint">Contact Number (09#########)</string>
     <string name="farm_password">Farm Password</string>
     <string name="edit_supply">Edit Supply</string>
     <string name="edit_all">Edit All</string>
     <string name="edit_ing">Edit Ingredient</string>
     <string name="transactions">Transactions</string>
+    <string name="edit_recipe">Edit Recipe</string>
+    <string name="nutri_req">Nutritional Requirements:</string>
+    <string name="amount_kg">Amount</string>
+    <string name="per_head">per head(kg)</string>
+    <string name="cost_php">Cost(Php)</string>
+    <string name="use_output">Use Formulated Output</string>
+    <string name="milk_production">Milk Production</string>
+    <string name="predict">Predict</string>
+    <string name="input_values">Input Values</string>
+    <string name="lactation_days">Lactation Days:</string>
+    <string name="fats_yield">Fats Yield:</string>
+    <string name="protein_yield">Protein Yield:</string>
+    <string name="total_solids_yield">Total Solids Yield:</string>
+    <string name="milk_yield">Milk Yield:</string>
+    <string name="predicted_label">Predicted Milk Yield:</string>
+    <string name="r_squared_label">Predicted output is </string>
+    <string name="correct_label">correct.</string>
+    <string name="animal_name">Animal Name</string>
+    <string name="total_cost_per_formulate">Total Cost Per Formulation:</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_user">User</string>
     <string name="action_settings">Settings</string>
@@ -121,19 +143,8 @@
     <string name="title_activity_admin">Admin</string>
     <string name="title_activity_login1">Sign in</string>
 
-
-    <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
     <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_supplier">SupplierActivity</string>
     <string name="title_activity_optimizer_menu">OptimizerMenuActivity</string>
+    <string name="title_activity_main2">Main2Activity</string>
 </resources>

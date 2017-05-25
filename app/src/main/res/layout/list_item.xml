@@ -21,7 +21,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/adj_r_squared"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight=".6"

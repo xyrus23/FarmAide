@@ -93,12 +93,11 @@
                         android:layout_marginTop="3dp"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:weightSum="1">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/animal_label"
-                            android:layout_width="wrap_content"
+                            android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:layout_weight=".4"
                             android:maxLines="1"
@@ -124,12 +123,11 @@
                     android:layout_marginBottom="3dp"
                     android:layout_marginTop="3dp"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/animal_type_label"
-                        android:layout_width="wrap_content"
+                        android:layout_width="85dp"
                         android:layout_height="wrap_content"
                         android:layout_weight=".4"
                         android:maxLines="1"
@@ -139,7 +137,7 @@
                         android:id="@+id/spinner_animal_type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".6"
+                        android:layout_weight=".5"
                         android:dropDownWidth="match_parent"
                         android:entries="@array/poultry_types"
                         android:paddingBottom="3dp"
@@ -279,6 +277,31 @@
                     android:layout_height="wrap_content"
                     android:layout_weight=".1"
                     android:text="%" />
+
+                <TextView
+                    android:id="@+id/textView19"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".4"
+                    android:maxLines="1"
+                    android:text="@string/animal_weight" />
+
+                <EditText
+                    android:id="@+id/recipe_aw"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".5"
+                    android:inputType="numberDecimal"
+                    android:textAlignment="center"
+                    android:textAppearance="@android:style/TextAppearance.Material.Small.Inverse"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/textView21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".1"
+                    android:text="kg" />
             </GridLayout>
 
         </LinearLayout>

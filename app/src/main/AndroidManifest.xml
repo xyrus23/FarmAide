@@ -35,6 +35,10 @@
             android:label="@string/title_activity_admin"
             android:theme="@style/AppTheme" />
         <activity
+            android:name=".Supplier"
+            android:label="@string/title_activity_supplier"
+            android:theme="@style/AppTheme" />
+        <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme" />
@@ -47,7 +51,13 @@
         <activity android:name=".UserSignup" />
         <activity android:name=".AddRecipeActivity" />
         <activity android:name=".TransactionsActivity" />
-        <activity android:name=".EditInventoryActivity"></activity>
+        <activity android:name=".EditInventoryActivity" />
+        <activity android:name=".EditRecipeActivity" />
+        <activity android:name=".RecipeDetailActivity" />
+        <activity android:name=".AdminPredictorYields" />
+        <activity android:name=".PredictorInputActivity" />
+        <activity android:name=".AddMilkYieldActivity" />
+        <activity android:name=".MilkYieldDetailActivity" />
     </application>
 
 </manifest>

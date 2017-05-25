@@ -61,16 +61,15 @@ public class AdminSupplierTab extends Fragment {
                     }
                     cursor.moveToNext();
                 }
+                ExpandableListView listView = (ExpandableListView) rootView.findViewById(R.id.expandable_listView);
+                ExpandableListAdapter listAdapter = new ExpandableListAdapter(getContext(), headers, listHashMap, hashSupply, contacts);
+                listView.setAdapter(listAdapter);
             }
 
             db.close();
             cursor.close();
             cursor1.close();
         } catch (SQLiteException e){}
-
-        ExpandableListView listView = (ExpandableListView) rootView.findViewById(R.id.expandable_listView);
-        ExpandableListAdapter listAdapter = new ExpandableListAdapter(getContext(), headers, listHashMap, hashSupply, contacts);
-        listView.setAdapter(listAdapter);
         return rootView;
     }
 }

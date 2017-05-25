@@ -10,8 +10,7 @@
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="?attr/dividerHorizontal"
-        android:showDividers="end"
+        android:showDividers="none"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
@@ -37,11 +36,9 @@
         android:layout_below="@+id/appbar"
         android:layout_centerHorizontal="true"
         android:background="@color/colorPrimary"
-        android:gravity="center_horizontal"
         android:isScrollContainer="false"
         android:orientation="horizontal"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp"
+        android:padding="5dp"
         android:showDividers="none">
 
         <TextView
@@ -54,7 +51,7 @@
             android:text="TextView"
             android:textAlignment="textStart"
             android:textAppearance="@android:style/TextAppearance.Material.Large"
-            android:textColor="@android:color/white"
+            android:textColor="@color/colorAccent"
             android:textSize="18sp" />
 
         <ImageView
@@ -63,7 +60,7 @@
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            android:tint="@android:color/white"
+            android:tint="@color/colorAccent"
             app:srcCompat="@drawable/next" />
 
         <TextView
@@ -76,7 +73,7 @@
             android:text="TextView"
             android:textAlignment="textStart"
             android:textAppearance="@android:style/TextAppearance.Material.Large"
-            android:textColor="@android:color/white"
+            android:textColor="@color/colorAccent"
             android:textSize="18sp" />
 
         <ImageView
@@ -85,7 +82,7 @@
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
             android:scaleType="centerInside"
-            android:tint="@android:color/white"
+            android:tint="@color/colorAccent"
             app:srcCompat="@drawable/next" />
 
         <TextView
@@ -103,89 +100,370 @@
 
     </LinearLayout>
 
-    <TableLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/btn_use"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/linearLayout"
-        android:layout_marginTop="10dp"
-        android:showDividers="middle"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:id="@+id/tableLayout"
-        android:layout_above="@+id/textView2">
+        android:layout_below="@+id/linearLayout">
 
-        <TableRow
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorAccent"
-            android:padding="5dp"
-            android:showDividers="middle"
-            android:weightSum="1">
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView"
+            <TableLayout
+                android:id="@+id/tableLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/adj_r_squared"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/linearLayout"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:showDividers="middle">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorAccent"
+                    android:orientation="horizontal"
+                    android:padding="5dp"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".5"
+                        android:text="@string/ingredients"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight=".25"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/amount_label"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".25"
+                            android:text="@string/amount_kg"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textView42"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".25"
+                            android:text="@string/per_head"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/total_cost_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".25"
+                        android:gravity="center_vertical"
+                        android:lines="2"
+                        android:text="@string/cost_php"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold" />
+
+                </TableRow>
+
+            </TableLayout>
+
+            <GridLayout
+                android:id="@+id/gridLayout_ruminants"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight=".5"
-                android:textAlignment="viewStart" />
+                android:layout_height="match_parent"
+                android:layout_above="@+id/btn_use"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_margin="15dp"
+                android:columnCount="2"
+                android:rowCount="7">
 
-            <TextView
-                android:id="@+id/amount_label"
+                <TextView
+                    android:id="@+id/textView27"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/total_cost_per_head"
+                    android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textView_total_cost_per_head"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textView28"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/total_animals"
+                    android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/textView_total_animals"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textView30"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/total_cost"
+                    android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textView_total_cost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textView32"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cp_label"
+                    android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/textView_cp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/textView34"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/me_label"
+                    android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/textView_me"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/textView36"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ca_label"
+                    android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/textView_ca"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/textView39"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/p_label"
+                    android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/textView_p"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+            </GridLayout>
+
+            <GridLayout
+                android:id="@+id/gridLayout"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight=".25"
-                android:text="@string/amount"
-                android:textAlignment="viewStart"
-                android:textColor="@android:color/white"
-                android:textStyle="bold" />
+                android:layout_height="match_parent"
+                android:layout_above="@+id/btn_use"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_margin="15dp"
+                android:columnCount="2"
+                android:rowCount="7">
 
-            <TextView
-                android:id="@+id/total_cost_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight=".25"
-                android:text="@string/cost"
-                android:textAlignment="viewStart"
-                android:textColor="@android:color/white"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/textView27"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/total_cost_per_formulate"
+                    android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                    android:textSize="18sp" />
 
-        </TableRow>
+                <TextView
+                    android:id="@+id/textView_total_cost_per_formulate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                    android:textSize="18sp" />
 
-    </TableLayout>
+                <TextView
+                    android:id="@+id/textView28"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/total_animals"
+                    android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/textView_total_capacity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textView30"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/total_cost"
+                    android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textView_total_cost_capacity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textView32"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cp_label"
+                    android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/textView_cp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/textView34"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/me_label"
+                    android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/textView_me"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/textView36"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ca_label"
+                    android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/textView_ca"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/textView39"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/p_label"
+                    android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/textView_p"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+            </GridLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btn_use"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/save"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="16dp"
+        android:onClick="useOutput"
+        android:text="@string/use_output" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button3"
-        android:layout_alignEnd="@+id/button3"
-        android:layout_alignRight="@+id/textView_total_cost"
-        android:layout_marginBottom="26dp"
-        android:layout_marginEnd="39dp"
-        android:text="@string/total_cost"
-        android:textAppearance="@android:style/TextAppearance.Material.Medium" />
-
-    <TextView
-        android:id="@+id/textView_total_cost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textAppearance="@android:style/TextAppearance.Material.Medium"
-        android:layout_marginLeft="54dp"
-        android:layout_marginStart="54dp"
-        android:layout_below="@+id/tableLayout"
-        android:layout_alignLeft="@+id/button3"
-        android:layout_alignStart="@+id/button3" />
 </RelativeLayout>

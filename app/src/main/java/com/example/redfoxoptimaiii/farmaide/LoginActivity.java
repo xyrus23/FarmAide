@@ -11,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
@@ -30,11 +32,18 @@ public class LoginActivity extends AppCompatActivity {
         if(user_type.equals("admin")){
             Button btn_signup = (Button) findViewById(R.id.signup);
             btn_signup.setVisibility(View.INVISIBLE);
-        }
+        } else findViewById(R.id.radiogroup).setVisibility(View.GONE);
     }
 
     public void login(View view){
-        Intent intent = user_type.equals("admin") ? new Intent(this, Admin.class) : new Intent(this, User.class);
+        Intent intent = new Intent();
+        if (user_type.equals("admin")){
+            RadioButton radio_farm = (RadioButton) findViewById(R.id.radioButton_farm);
+            RadioButton radio_supplier = (RadioButton) findViewById(R.id.radioButton_supplier);
+            if (radio_farm.isChecked()) intent = new Intent(this, Admin.class);
+            else if (radio_supplier.isChecked()) intent = new Intent(this, Supplier.class);
+        }
+        else if (user_type.equals("user")) intent = new Intent(this, User.class);
         EditText username = (EditText)findViewById(R.id.username);
         EditText password = (EditText)findViewById(R.id.password);
         if(onSuccessLogin(username.getText().toString().trim(), password.getText().toString())){

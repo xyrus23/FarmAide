@@ -15,8 +15,9 @@ public class Animal {
     public float me_req;
     public float ca_req;
     public float p_req;
+    public float animal_weight;
 
-    public Animal(String name, String animal, String type, float dm_req, float cp_req, float me_req, float ca_req, float p_req) {
+    public Animal(String name, String animal, String type, float dm_req, float cp_req, float me_req, float ca_req, float p_req, float animal_weight) {
         this.animal = animal;
         this.name = name;
         this.type = type;
@@ -25,6 +26,7 @@ public class Animal {
         this.me_req = me_req;
         this.ca_req = ca_req;
         this.p_req = p_req;
+        this.animal_weight = animal_weight;
     }
 
     public String getAnimal() {
@@ -57,5 +59,9 @@ public class Animal {
 
     public float getP_req() {
         return p_req;
+    }
+
+    public float getAnimal_weight(){
+        return animal_weight;
     }
 }

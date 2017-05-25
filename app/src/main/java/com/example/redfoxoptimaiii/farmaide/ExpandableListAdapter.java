@@ -5,8 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,7 +25,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     private HashMap<String, List<String>> listHashMap;
     private HashMap<String, List<String>> hashSupply;
     private List<String> contacts;
-    private HashMap<String, String> checked;
+    private HashMap<String, List<String>> checkedItems = new HashMap<>();
 
     public ExpandableListAdapter(Context context, List<String> listDataHeader, HashMap<String, List<String>> listHashMap, HashMap<String, List<String>> hashSupply, List<String> contacts) {
         this.context = context;
@@ -29,6 +33,13 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         this.listHashMap = listHashMap;
         this.hashSupply = hashSupply;
         this.contacts = contacts;
+        for (int i=0;i<listDataHeader.size();i+=1){
+            List<String> list = new ArrayList<>();
+            for (int j=0;j<listHashMap.get(listDataHeader.get(i)).size();j+=1){
+                list.add(listHashMap.get(listDataHeader.get(i)).get(j));
+            }
+            this.checkedItems.put(listDataHeader.get(i),list);
+        }
     }
 
     @Override
@@ -92,7 +103,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+    public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         final String childText = (String)getChild(groupPosition,childPosition);
         final String supplyText = getSupply(groupPosition,childPosition);
         if(convertView == null){
@@ -105,8 +116,26 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         listItem.setText(childText);
         TextView listItem_supply = (TextView) convertView.findViewById(R.id.list_item_supply);
         listItem_supply.setText(supplyText);
+        if(contacts==null){
+            final CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.list_item);
+            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked)
+                        getCheckedGroup(getGroup(groupPosition).toString()).add(buttonView.getText().toString());
+                    else
+                        getCheckedGroup(getGroup(groupPosition).toString()).remove(buttonView.getText().toString());
+                }
+            });
+        }
         return convertView;
     }
+
+    public HashMap getCheckedItems(){
+        return checkedItems;
+    }
+
+    public List getCheckedGroup(String groupName){ return checkedItems.get(groupName);}
 
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {

@@ -42,8 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/AppTheme.AppBarOverlay"
-            app:tabIndicatorColor="@android:color/white"
-            app:tabMode="scrollable" />
+            app:tabIndicatorColor="@android:color/white" />
 
     </android.support.design.widget.AppBarLayout>
 

@@ -5,15 +5,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.support.v4.widget.CursorAdapter;
-import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -91,7 +88,7 @@ public class TransactionsActivity extends AppCompatActivity {
                             }
                             TextView textView1 = (TextView) convertView.findViewById(R.id.textView1);
                             textView1.setText(listNote.get(position));
-                            TextView textView2 = (TextView) convertView.findViewById(R.id.textView2);
+                            TextView textView2 = (TextView) convertView.findViewById(R.id.adj_r_squared);
                             textView2.setText(listTimeStamp.get(position));
                             return convertView;
                         }

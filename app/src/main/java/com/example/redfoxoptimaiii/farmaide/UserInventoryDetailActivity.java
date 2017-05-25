@@ -138,7 +138,7 @@ public class UserInventoryDetailActivity extends AppCompatActivity {
                         new String[]{Integer.toString(User.farm_id), feed_name},
                         null, null, null);
                 if (cursor.moveToFirst()) {
-                    if (cursor.getDouble(1) <= value)
+                    if (cursor.getDouble(1) < value)
                         Toast.makeText(this, "Amount is greater than available supply", Toast.LENGTH_SHORT).show();
                     else {
                         FarmAideDBHelper.updateFeedSupply(db, cursor.getInt(0), (cursor.getDouble(1) - value));

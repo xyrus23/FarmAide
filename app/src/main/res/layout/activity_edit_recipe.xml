@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.redfoxoptimaiii.farmaide.EditRecipeActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_recipe"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            android:foregroundTintMode="multiply"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:navigationIcon="@android:drawable/ic_menu_close_clear_cancel"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="@string/edit_recipe">
+
+            <!--<TextView-->
+            <!--android:id="@+id/profile_name"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="right"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:text="Profile"-->
+            <!--android:textAppearance="@style/TextAppearance.AppCompat.Medium" />-->
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_add_recipe"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/appbar"
+        android:layout_marginTop="12dp">
+
+        <LinearLayout
+            android:id="@+id/signup_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/image_picker"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:weightSum="1">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_recipe_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <EditText
+                        android:id="@+id/recipe_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_above="@+id/signup_form"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_weight="1"
+                        android:hint="@string/recipe_label"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
+                        android:textSize="18sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="3dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/animal_label"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".4"
+                            android:maxLines="1"
+                            android:text="@string/animal_label" />
+
+                        <Spinner
+                            android:id="@+id/spinner_animal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".6"
+                            android:dropDownWidth="match_parent"
+                            android:entries="@array/animal_types"
+                            android:paddingBottom="3dp"
+                            android:paddingTop="3dp"
+                            android:spinnerMode="dropdown" />
+                    </LinearLayout>
+
+                </android.support.design.widget.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginTop="3dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/animal_type_label"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".4"
+                        android:maxLines="1"
+                        android:text="@string/animal_type" />
+
+                    <Spinner
+                        android:id="@+id/spinner_animal_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".6"
+                        android:dropDownWidth="match_parent"
+                        android:entries="@array/all_animal_types"
+                        android:paddingBottom="3dp"
+                        android:paddingTop="3dp"
+                        android:spinnerMode="dropdown" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="3"
+                android:rowCount="8">
+
+                <TextView
+                    android:id="@+id/dm_req_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".3"
+                    android:maxLines="1"
+                    android:text="@string/dm_req" />
+
+                <EditText
+                    android:id="@+id/recipe_dm"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".6"
+                    android:inputType="numberDecimal"
+                    android:textAlignment="center"
+                    android:textAppearance="@android:style/TextAppearance.Material.Small.Inverse"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".1"
+                    android:text="%" />
+
+                <TextView
+                    android:id="@+id/cp_req_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".3"
+                    android:maxLines="1"
+                    android:text="@string/cp_req" />
+
+                <EditText
+                    android:id="@+id/recipe_cp"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".6"
+                    android:inputType="numberDecimal"
+                    android:textAlignment="center"
+                    android:textAppearance="@android:style/TextAppearance.Material.Small.Inverse"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".1"
+                    android:text="%" />
+
+                <TextView
+                    android:id="@+id/me_req_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".1"
+                    android:maxLines="1"
+                    android:text="@string/me_req" />
+
+                <EditText
+                    android:id="@+id/recipe_me"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".3"
+                    android:inputType="numberDecimal"
+                    android:textAlignment="center"
+                    android:textAppearance="@android:style/TextAppearance.Material.Small.Inverse"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".6"
+                    android:text="kcal/kg" />
+
+                <TextView
+                    android:id="@+id/ca_req_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".4"
+                    android:maxLines="1"
+                    android:text="@string/ca_req" />
+
+                <EditText
+                    android:id="@+id/recipe_ca"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".5"
+                    android:inputType="numberDecimal"
+                    android:textAlignment="center"
+                    android:textAppearance="@android:style/TextAppearance.Material.Small.Inverse"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".1"
+                    android:text="%" />
+
+                <TextView
+                    android:id="@+id/p_req_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".4"
+                    android:maxLines="1"
+                    android:text="@string/p_req" />
+
+                <EditText
+                    android:id="@+id/recipe_p"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".5"
+                    android:inputType="numberDecimal"
+                    android:textAlignment="center"
+                    android:textAppearance="@android:style/TextAppearance.Material.Small.Inverse"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".1"
+                    android:text="%" />
+
+                <TextView
+                    android:id="@+id/textView23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".4"
+                    android:maxLines="1"
+                    android:text="@string/animal_weight" />
+
+                <EditText
+                    android:id="@+id/recipe_aw"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".5"
+                    android:inputType="numberDecimal"
+                    android:textAlignment="center"
+                    android:textAppearance="@android:style/TextAppearance.Material.Small.Inverse"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/textView24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".1"
+                    android:text="kg" />
+            </GridLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/button5"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="11dp"
+        android:elevation="0dp"
+        android:onClick="editRecipe"
+        android:text="@string/edit_btn" />
+
+</RelativeLayout>

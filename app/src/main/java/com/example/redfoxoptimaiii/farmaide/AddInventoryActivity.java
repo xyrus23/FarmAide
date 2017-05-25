@@ -116,7 +116,7 @@ public class AddInventoryActivity extends AppCompatActivity {
     public void addInventory(View view){
         TextInputLayout input_name = (TextInputLayout) findViewById(R.id.input_ingredient_name);
         String feed_type = ((Spinner) findViewById(R.id.spinner_type)).getSelectedItem().toString();
-        String feed_name = ((EditText)findViewById(R.id.ingredient_name)).getText().toString();
+        String feed_name = ((EditText)findViewById(R.id.ingredient_name)).getText().toString().trim();
         String dm = ((EditText)findViewById(R.id.editText_dm)).getText().toString();
         String cp = ((EditText)findViewById(R.id.editText_cp)).getText().toString();
         String me = ((EditText)findViewById(R.id.editText_me)).getText().toString();
@@ -144,7 +144,7 @@ public class AddInventoryActivity extends AppCompatActivity {
         else{
             try{
                 SQLiteOpenHelper FarmAideDBHelper = new FarmAideDatabaseHelper(this);
-                db = FarmAideDBHelper.getReadableDatabase();
+                db = FarmAideDBHelper.getWritableDatabase();
                 cursor = db.query("FEED",
                         new String[]{"feed_name"},
                         "farm_id=? AND feed_name=?",

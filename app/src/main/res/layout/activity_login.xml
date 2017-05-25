@@ -66,6 +66,35 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
+        <RadioGroup
+            android:id="@+id/radiogroup"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioButton_farm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/textView_login"
+                android:layout_alignLeft="@+id/app_title"
+                android:layout_alignStart="@+id/app_title"
+                android:layout_weight="1"
+                android:checked="true"
+                android:text="Farm Admin" />
+
+            <RadioButton
+                android:id="@+id/radioButton_supplier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/radioButton_farm"
+                android:layout_toEndOf="@+id/textView_login"
+                android:layout_toRightOf="@+id/textView_login"
+                android:layout_weight="1"
+                android:text="Supplier" />
+        </RadioGroup>
+
         <android.support.design.widget.TextInputLayout
             android:id="@+id/input_username"
             android:layout_width="match_parent"
@@ -101,9 +130,6 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
                 android:hint="@string/input_password"
-                android:imeActionId="@+id/login"
-                android:imeActionLabel="@string/action_sign_in_short"
-                android:imeOptions="actionUnspecified"
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:singleLine="true" />

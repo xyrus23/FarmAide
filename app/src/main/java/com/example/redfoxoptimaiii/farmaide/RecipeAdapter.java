@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -67,7 +68,7 @@ public class RecipeAdapter extends BaseAdapter {
                     convertView = inflater.inflate(android.R.layout.simple_list_item_1,null);
                     break;
                 case ANIMAL:
-                    convertView = inflater.inflate(R.layout.list_header,null);
+                    convertView = inflater.inflate(R.layout.animal_list_header,null);
                     break;
                 case ANIMAL_TYPE:
                     convertView = inflater.inflate(R.layout.list_subheader,null);
@@ -82,6 +83,10 @@ public class RecipeAdapter extends BaseAdapter {
             case ANIMAL:
                 TextView animal = (TextView) convertView.findViewById(R.id.list_header);
                 animal.setText(list.get(position));
+                ImageView image = (ImageView) convertView.findViewById(R.id.imageView);
+                if (list.get(position).equals("Poultry")) image.setImageResource(R.drawable.poultry);
+                else if (list.get(position).equals("Ruminants")) image.setImageResource(R.drawable.ruminants);
+                else if (list.get(position).equals("Swine")) image.setImageResource(R.drawable.swine);
                 break;
             case ANIMAL_TYPE:
                 TextView animalType = (TextView) convertView.findViewById(R.id.list_subheader);
