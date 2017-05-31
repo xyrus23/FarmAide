@@ -28,7 +28,7 @@ public class FarmAideDatabaseHelper extends SQLiteOpenHelper {
 	String[] userColNames = {"user_type","username","password"};
 	String[] feedColNames = {"feed_type","feed_name","dry_matter","feed_price","supply_amount",
 	"crude_protein","met_energy","calcium","phosphorus","pic_ref"};
-	
+
     FarmAideDatabaseHelper(Context context){
         super(context, DB_NAME, null, DB_VERSION);
     	this.context = context;
@@ -56,8 +56,8 @@ public class FarmAideDatabaseHelper extends SQLiteOpenHelper {
                 + "password TEXT,"
                 + "contact_no TEXT);");
 
-        insertFarm(db, "Farm A", "farm1", "09123456789");
-        insertFarm(db, "Farm B", "farm2", "09999999999");
+        insertFarm(db, "Farm A (Farm)", "farm1", "09123456789");
+        insertFarm(db, "Farm B (Farm)", "farm2", "09999999999");
 
         db.execSQL("CREATE TABLE USER ("
                 + "user_id INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -75,8 +75,8 @@ public class FarmAideDatabaseHelper extends SQLiteOpenHelper {
                 + "farm_id INTEGER,"
                 + "feed_type TEXT, "
                 + "feed_name TEXT, "
-                + "dry_matter TEXT,"
-				+ "total_digestible_nutrient,"
+                + "dry_matter REAL,"
+				+ "total_digestible_nutrient REAL,"
                 + "feed_price REAL, "
                 + "supply_amount REAL, "
                 + "crude_protein REAL,"
@@ -84,12 +84,13 @@ public class FarmAideDatabaseHelper extends SQLiteOpenHelper {
                 + "calcium REAL, "
                 + "phosphorus REAL, "
                 + "pic_ref INTEGER);");
-        insertFeed(db, 1, "Concentrate", "Yellow Corn", 87, 75.2, 16, 23, 7.8, 3350, .07, .25, convertDrawableToBye(R.drawable.concentrate_yellowcorn));
-		insertFeed(db, 1, "Concentrate", "Rice Bran", 89, 77.7, 10, 25, 12.5, 3000, .08, 1.6, convertDrawableToBye(R.drawable.concentrate_ricebran));
-        insertFeed(db, 1, "Concentrate", "Cassava Meal", 86, 84, 8, 33.56, 1.8, 2800, .12, .1, convertDrawableToBye(R.drawable.concentrate_cassavameal));
+        insertFeed(db, 1, "Concentrate", "Yellow Corn", 87, 75.2, 16, 223, 7.8, 3350, .07, .25, convertDrawableToBye(R.drawable.concentrate_yellowcorn));
+		insertFeed(db, 1, "Concentrate", "Rice Bran", 89, 77.7, 10, 325, 12.5, 3000, .08, 1.6, convertDrawableToBye(R.drawable.concentrate_ricebran));
+        insertFeed(db, 1, "Concentrate", "Cassava Meal", 86, 84, 8, 356, 1.8, 2800, .12, .1, convertDrawableToBye(R.drawable.concentrate_cassavameal));
         insertFeed(db, 1, "Roughage", "Napier Grass", 22, 55, 0, 500.64, 63, 10.31, .3, .25, convertDrawableToBye(R.drawable.roughage_napier));
 		insertFeed(db, 1, "Additive", "L-Lysine", 0, 0, 20, 200, 78.8, 0, 0, 0, convertDrawableToBye(R.drawable.additive_l_lysine));
 		insertFeed(db, 1, "Additive", "Dicalcium Phosphate", 0, 0, 25, 250, 0, 0, 24.26, 19.89, convertDrawableToBye(R.drawable.additive_dicalcium_phosphate));
+		insertFeed(db, 1, "Additive", "Limestone", 0, 0, 1.5, 250, 0, 0, 38, .16, convertDrawableToBye(R.drawable.additive_limestone));
 
 		db.execSQL("CREATE TABLE TRANSACTIONS ("
 				+ "transaction_id INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -257,24 +258,24 @@ public class FarmAideDatabaseHelper extends SQLiteOpenHelper {
 		yieldValues.put("time_stamp", time_stamp);
 		db.insert("MILK_YIELD", null, yieldValues);
 	}
-		
+
 	//update  user
 	public void updateUser(SQLiteDatabase db, Integer id, String username, String password){
 		ContentValues userVal = new ContentValues();
 		ArrayList<String> updateUserVal = new ArrayList<>();
-		
+
 		updateUserVal.add(username);
 		updateUserVal.add(password);
-		
+
 		for(int i=0; i<2; i++){
 			if(updateUserVal.get(i) != null){
 				userVal.put(userColNames[i], updateUserVal.get(i));
 			}
 		}
-		
+
 		db.update("USER", userVal, "id = ?", new String[] {Integer.toString(id)} );
 	}
-	
+
 	//update feed
 	public void updateFeed(SQLiteDatabase db, Integer id, String feed_type, String feed_name, double dry_matter,
 						   double total_digestible_nutrient, double feed_price, double supply_amount, double crude_protein,
@@ -300,7 +301,7 @@ public class FarmAideDatabaseHelper extends SQLiteOpenHelper {
 		amount.put("supply_amount", supply_amount);
 		db.update("FEED", amount, "feed_id = ?", new String[] {Integer.toString(id)});
 	}
-	
+
 	//update recipe
 	public void updateRecipe(SQLiteDatabase db, Integer id, String recipe_name, String animal, String animal_type, double dm_req, double cp_req, double me_req, double ca_req, double p_req, double animal_weight){
 		ContentValues recipeValues = new ContentValues();

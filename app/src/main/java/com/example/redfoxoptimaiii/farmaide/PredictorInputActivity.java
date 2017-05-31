@@ -17,13 +17,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.util.Date;
 
 public class PredictorInputActivity extends AppCompatActivity {
 
     private double[][] dataX;
     private double[][] dataY;
-    private double predictedOutput, r_squared, adj_r_squared;
+    private double predictedOutput, adj_r_squared;
     private int cow_id;
     private SQLiteDatabase db;
 
@@ -48,17 +50,13 @@ public class PredictorInputActivity extends AppCompatActivity {
         for (int i=0;i<sizeX;i+=1)
             for (int j = 0; j < cols; j += 1)
                 dataX[i][j] = getIntent().getDoubleArrayExtra("dataX" + i)[j];
-        MLR mlr = new MLR(dataX);
         dataY = new double[dataX.length][1];
         for (int i=0;i<dataX.length;i+=1){
             dataY[i][0] = dataX[i][0];
             dataX[i][0] = 1;
         }
-        adj_r_squared = mlr.getAdj_r_sqrd()*100;
-        String value = String.format("%.2f", adj_r_squared);
-        ((TextView)findViewById(R.id.adj_r_squared)).setText("Adequacy Fit: "+value+"%");
-        if (adj_r_squared > 50) ((TextView)findViewById(R.id.adj_r_squared)).setTextColor(getResources().getColor(R.color.colorPrimary));
-        else ((TextView)findViewById(R.id.adj_r_squared)).setTextColor(Color.RED);
+        findViewById(R.id.textView2).setVisibility(View.GONE);
+        findViewById(R.id.adj_r_squared).setVisibility(View.GONE);
     }
 
     public void predict(View view){
@@ -79,10 +77,15 @@ public class PredictorInputActivity extends AppCompatActivity {
 
             MLR mlr = new MLR(dataX, dataY, in);
             predictedOutput = mlr.getPredictedOutput();
-            r_squared = mlr.getR_squared()*100;
             adj_r_squared = mlr.getAdj_r_sqrd()*100;
 
             String pvalue = String.format("%.2f", predictedOutput);
+            String rvalue = String.format("%.2f", adj_r_squared);
+            ((TextView)findViewById(R.id.adj_r_squared)).setText(rvalue+"%");
+            if (adj_r_squared > 50) ((TextView)findViewById(R.id.adj_r_squared)).setTextColor(getResources().getColor(R.color.colorPrimary));
+            else ((TextView)findViewById(R.id.adj_r_squared)).setTextColor(Color.RED);
+            findViewById(R.id.textView2).setVisibility(View.VISIBLE);
+            findViewById(R.id.adj_r_squared).setVisibility(View.VISIBLE);
 
             //SHOW OUTPUT
             final Snackbar snackbar = Snackbar.make(view, "", Snackbar.LENGTH_INDEFINITE);

@@ -52,7 +52,8 @@ public class SupplierConcentrateTab extends Fragment {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent intent = new Intent(getContext(), SupplierInventoryDetailActivity.class);
-                        intent.putExtra("feed_name", list.get(position));
+                        intent.putExtra("id", (int) id);
+                        intent.putExtra("feed_names", list);
                         startActivity(intent);
                     }
                 });

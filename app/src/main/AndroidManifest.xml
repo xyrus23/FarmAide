@@ -58,6 +58,8 @@
         <activity android:name=".PredictorInputActivity" />
         <activity android:name=".AddMilkYieldActivity" />
         <activity android:name=".MilkYieldDetailActivity" />
+        <activity android:name=".SupplierInventoryDetailActivity" />
+        <activity android:name=".SupplierAddInventory" />
     </application>
 
 </manifest>

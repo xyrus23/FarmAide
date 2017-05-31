@@ -65,9 +65,9 @@ public class AdminInventoryTab extends Fragment {
                 }
                 for (int i=0;i<feed_types.size();i+=1){
                      cursor2 = db.query("FEED",
-                            new String[] {"feed_name","pic_ref"},
+                            new String[] {"feed_name"},
                             "farm_id=? AND feed_type=?",
-                            new String[]{Integer.toString(Admin.farm_id),feed_types.get(i)},null,null,"feed_name ASC");
+                            new String[]{Integer.toString(Admin.farm_id),feed_types.get(i).trim()},null,null,"feed_name ASC");
                     if(cursor2.moveToFirst()){
                         for (int j=0;j<cursor2.getCount();j++){
                             if(!list.contains(feed_types.get(i))){
@@ -76,7 +76,6 @@ public class AdminInventoryTab extends Fragment {
                             }
                             list.add(cursor2.getString(0));
                             feed_names.add(cursor2.getString(0));
-                            pics.add(cursor2.getBlob(1));
                             cursor2.moveToNext();
                         }
                     }

@@ -53,6 +53,35 @@
             android:orientation="vertical"
             android:padding="15dp">
 
+            <RadioGroup
+                android:id="@+id/radiogroup"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radioButton_farm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/textView_login"
+                    android:layout_alignLeft="@+id/app_title"
+                    android:layout_alignStart="@+id/app_title"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="Farm" />
+
+                <RadioButton
+                    android:id="@+id/radioButton_supplier"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/radioButton_farm"
+                    android:layout_toEndOf="@+id/textView_login"
+                    android:layout_toRightOf="@+id/textView_login"
+                    android:layout_weight="1"
+                    android:text="Supplier" />
+            </RadioGroup>
+
             <TextView
                 android:id="@+id/textView8"
                 android:layout_width="match_parent"

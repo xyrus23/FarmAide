@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -43,7 +44,9 @@ public class SupplierInventoryDetailActivity extends AppCompatActivity {
 
 //        TextView username = (TextView) findViewById(R.id.profile_name);
 //        username.setText(Admin.username);
-        feed_name = getIntent().getStringExtra("feed_name").trim();
+        int id = getIntent().getIntExtra("id", 0);
+        ArrayList<String> list = getIntent().getStringArrayListExtra("feed_names");
+        feed_name = list.get(id);
 
         try{
             SQLiteOpenHelper FarmAideDBHelper = new FarmAideDatabaseHelper(this);

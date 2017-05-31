@@ -106,21 +106,22 @@ public class OptimizerSolutionActivity extends AppCompatActivity {
             row.addView(cost);
             tableLayout.addView(row);
         }
+        float capacity = supplies[getMinIndex(supplies)] / amounts[getMinIndex(supplies)];
         if (animal.equals("Ruminants")) {
             String value = String.format("%.2f", total_cost_per_head);
             ((TextView) findViewById(R.id.textView_total_cost_per_head)).setText("Php " + value);
-            value = String.format("%.0f", (supplies[getMinIndex(supplies)] / amounts[getMinIndex(supplies)]));
-            ((TextView) findViewById(R.id.textView_total_animals)).setText(value + " heads");
-            value = String.format("%.2f", (total_cost_per_head * (supplies[getMinIndex(supplies)] / amounts[getMinIndex(supplies)])));
+            value = String.format("%.0f", capacity);
+            ((TextView) findViewById(R.id.textView_total_animals)).setText(value + " head/s");
+            value = String.format("%.2f", (total_cost_per_head * capacity));
             ((TextView) findViewById(R.id.textView_total_cost)).setText("Php " + value);
             findViewById(R.id.gridLayout).setVisibility(View.GONE);
         }
         else{
             String value = String.format("%.2f", total_cost_per_head);
             ((TextView) findViewById(R.id.textView_total_cost_per_formulate)).setText("Php " + value);
-            value = String.format("%.0f", (supplies[getMinIndex(supplies)] / amounts[getMinIndex(supplies)]));
-            ((TextView) findViewById(R.id.textView_total_capacity)).setText(value + " heads");
-            value = String.format("%.2f", (total_cost_per_head * (supplies[getMinIndex(supplies)] / amounts[getMinIndex(supplies)])));
+            value = String.format("%.0f", capacity);
+            ((TextView) findViewById(R.id.textView_total_capacity)).setText(value + " formulation/s");
+            value = String.format("%.2f", (total_cost_per_head * capacity));
             ((TextView) findViewById(R.id.textView_total_cost_capacity)).setText("Php " + value);
             findViewById(R.id.gridLayout_ruminants).setVisibility(View.GONE);
         }

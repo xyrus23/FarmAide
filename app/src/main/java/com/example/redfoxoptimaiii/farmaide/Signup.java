@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 public class Signup extends AppCompatActivity {
@@ -116,6 +117,8 @@ public class Signup extends AppCompatActivity {
                 }
 
                 if(check){
+                    if(((RadioButton)findViewById(R.id.radioButton_farm)).isChecked()) farm_name+=" (Farm)";
+                    else farm_name+= " (Supplier)";
                     ((FarmAideDatabaseHelper)FarmAideDBHelper).insertFarm(db, farm_name, farm_password, contact_no);
                     cursor = db.query("FARM",
                             new String[] {"farm_id"},
